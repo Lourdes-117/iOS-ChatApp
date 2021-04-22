@@ -13,6 +13,8 @@
 		AE4FA97B2631F3E3006A3243 /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA9792631F3E3006A3243 /* MainViewController.storyboard */; };
 		AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA97C2631F3E5006A3243 /* Assets.xcassets */; };
 		AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA97E2631F3E5006A3243 /* LaunchScreen.storyboard */; };
+		AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9902631F637006A3243 /* LoginViewController.swift */; };
+		AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA9942631F675006A3243 /* LoginViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AE4FA97C2631F3E5006A3243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE4FA97F2631F3E5006A3243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE4FA9812631F3E5006A3243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE4FA9902631F637006A3243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AE4FA9942631F675006A3243 /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				AE4FA98B2631F514006A3243 /* MainScreen */,
+				AE4FA98F2631F629006A3243 /* Login */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -97,6 +102,15 @@
 				AE4FA9812631F3E5006A3243 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AE4FA98F2631F629006A3243 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AE4FA9902631F637006A3243 /* LoginViewController.swift */,
+				AE4FA9942631F675006A3243 /* LoginViewController.storyboard */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */,
+				AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
 				AE4FA97B2631F3E3006A3243 /* MainViewController.storyboard in Resources */,
 			);
@@ -169,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */,
 				AE4FA9782631F3E3006A3243 /* MainViewController.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE4FA9762631F3E3006A3243 /* SceneDelegate.swift in Sources */,
