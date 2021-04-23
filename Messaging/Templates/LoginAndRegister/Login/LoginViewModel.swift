@@ -18,7 +18,7 @@ class LoginControllerViewModel {
     var pageTitle: String {
         isOnLoginPage ? loginTitle : registerTitle
     }
-    var buttonTitle: String {
+    var loginRegisterSwitchButtonTitle: String {
         isOnLoginPage ? registerTitle : loginTitle
     }
     var shouldHideLoginPage: Bool {

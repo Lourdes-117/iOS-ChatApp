@@ -41,11 +41,14 @@ class RegisterView: UIView {
     }
     
     fileprivate func setupDelegates() {
+        firstNameField.delegate = self
+        secondNameField.delegate = self
         emailAddressTextBox.delegate = self
         passwordTextBox.delegate = self
         emailAddressTextBox.addTarget(self, action: #selector(emailAddressChange), for: .editingChanged)
         passwordTextBox.addTarget(self, action: #selector(passwordChange), for: .editingChanged)
         firstNameField.addTarget(self, action: #selector(nameChange(nameTextField:)), for: .editingChanged)
+        secondNameField.addTarget(self, action: #selector(nameChange(nameTextField:)), for: .editingChanged)
     }
     
     @objc func emailAddressChange() {
@@ -61,10 +64,28 @@ class RegisterView: UIView {
     }
     
     @objc func nameChange(nameTextField: UITextField) {
-        print(nameTextField.text)
+        guard let name = nameTextField.text else { return }
+        nameTextField.layer.borderColor = viewModel.getNameBorder(forName: name)
     }
     
     @IBAction func onTapRegisterButton(_ sender: Any) {
+        delegate?.shouldDismissKeyboard()
+        nameChange(nameTextField: firstNameField)
+        nameChange(nameTextField: secondNameField)
+        emailAddressChange()
+        passwordChange()
+        guard let firstName = firstNameField.text,
+              viewModel.isNameValid(firstName),
+              let secondName = secondNameField.text,
+              viewModel.isNameValid(secondName),
+              let email = emailAddressTextBox.text,
+              viewModel.isEmailValid(email),
+              let password = passwordTextBox.text,
+              viewModel.isPasswordStrong(password) else {
+            delegate?.invalidFormSubmitted()
+            return
+        }
+        print("Register Success")
     }
 }
 

@@ -67,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				AE4FA9722631F3E3006A3243 /* Messaging */,
-				AE88A87A26333A8A003F35DF /* Organisms */,
 				AE4FA9712631F3E3006A3243 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,22 +82,23 @@
 		AE4FA9722631F3E3006A3243 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
-				AEFBA8AC263214600052D150 /* Utilities */,
-				AE4FA9812631F3E5006A3243 /* Info.plist */,
 				AE4FA98C2631F528006A3243 /* Lifecycle */,
+				AE4FA98A2631F50B006A3243 /* Templates */,
+				AE88A87A26333A8A003F35DF /* Organisms */,
+				AEFBA8AC263214600052D150 /* Utilities */,
 				AE4FA98D2631F534006A3243 /* Resources */,
-				AE4FA98A2631F50B006A3243 /* Screens */,
+				AE4FA9812631F3E5006A3243 /* Info.plist */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
 		};
-		AE4FA98A2631F50B006A3243 /* Screens */ = {
+		AE4FA98A2631F50B006A3243 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
 				AE4FA98B2631F514006A3243 /* MainScreen */,
 				AE4FA98F2631F629006A3243 /* LoginAndRegister */,
 			);
-			path = Screens;
+			path = Templates;
 			sourceTree = "<group>";
 		};
 		AE4FA98B2631F514006A3243 /* MainScreen */ = {

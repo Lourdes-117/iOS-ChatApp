@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4o-JA-4lP">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="M4o-JA-4lP">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0M-hH-S7z">
@@ -81,6 +81,7 @@
                         <outlet property="imageViewWidthConstraint" destination="fxZ-Ph-AXo" id="hOm-Iw-ye9"/>
                         <outlet property="loginView" destination="1rZ-Ez-pwW" id="ijC-Dl-hz2"/>
                         <outlet property="registerView" destination="uRv-xj-aFY" id="evU-UE-XlJ"/>
+                        <outlet property="scrollView" destination="M4o-JA-4lP" id="aUV-FK-V01"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqr-c2-EbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
