@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterView" customModule="Messaging" customModuleProvider="target">
+            <connections>
+                <outlet property="emailAddressTextBox" destination="NTP-VS-W1m" id="JKw-Tf-hQy"/>
+                <outlet property="firstNameField" destination="y6x-sr-Yzy" id="QeI-FY-rem"/>
+                <outlet property="passwordTextBox" destination="g1k-A7-aB3" id="Z3G-kU-S9Z"/>
+                <outlet property="secondNameField" destination="80w-vL-aBO" id="eGt-9a-T9a"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2KS-ec-fhM">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="456"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vB-4r-JqX">
+                    <rect key="frame" x="20" y="137" width="112" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your First Name..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y6x-sr-Yzy">
+                    <rect key="frame" x="20" y="73" width="383" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Second Name..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="80w-vL-aBO">
+                    <rect key="frame" x="20" y="166" width="383" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFw-vB-7YZ">
+                    <rect key="frame" x="20" y="44" width="87" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJM-yc-sDK">
+                    <rect key="frame" x="20" y="323" width="78" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Email Address..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NTP-VS-W1m">
+                    <rect key="frame" x="20" y="259" width="383" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Password..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="g1k-A7-aB3">
+                    <rect key="frame" x="20" y="352" width="383" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ja-ho-bCz">
+                    <rect key="frame" x="20" y="230" width="112" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g19-yH-2Ha">
+                    <rect key="frame" x="183" y="406" width="57" height="30"/>
+                    <state key="normal" title="Register"/>
+                    <connections>
+                        <action selector="onTapRegisterButton:" destination="-1" eventType="touchUpInside" id="hcE-U8-k3Q"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="00S-Uf-WKV"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="2Ja-ho-bCz" firstAttribute="leading" secondItem="80w-vL-aBO" secondAttribute="leading" id="04g-jc-YSB"/>
+                <constraint firstItem="g1k-A7-aB3" firstAttribute="trailing" secondItem="NTP-VS-W1m" secondAttribute="trailing" id="2dg-oc-t8u"/>
+                <constraint firstItem="NTP-VS-W1m" firstAttribute="leading" secondItem="2Ja-ho-bCz" secondAttribute="leading" id="3rd-Qx-2Ce"/>
+                <constraint firstItem="80w-vL-aBO" firstAttribute="trailing" secondItem="y6x-sr-Yzy" secondAttribute="trailing" id="4gw-tx-akP"/>
+                <constraint firstItem="00S-Uf-WKV" firstAttribute="trailing" secondItem="y6x-sr-Yzy" secondAttribute="trailing" constant="20" id="BDQ-9p-tSA"/>
+                <constraint firstItem="g1k-A7-aB3" firstAttribute="leading" secondItem="qJM-yc-sDK" secondAttribute="leading" id="C4G-k7-KxD"/>
+                <constraint firstItem="g1k-A7-aB3" firstAttribute="top" secondItem="qJM-yc-sDK" secondAttribute="bottom" constant="8" id="Ebe-O1-QP3"/>
+                <constraint firstItem="2Ja-ho-bCz" firstAttribute="top" secondItem="80w-vL-aBO" secondAttribute="bottom" constant="30" id="FHA-B4-qLb"/>
+                <constraint firstAttribute="bottom" secondItem="g19-yH-2Ha" secondAttribute="bottom" constant="20" symbolic="YES" id="H7Z-ie-Q3V"/>
+                <constraint firstItem="y6x-sr-Yzy" firstAttribute="top" secondItem="kFw-vB-7YZ" secondAttribute="bottom" constant="8" id="LZN-QH-UDo"/>
+                <constraint firstItem="g19-yH-2Ha" firstAttribute="top" secondItem="g1k-A7-aB3" secondAttribute="bottom" constant="20" id="QKw-z3-39j"/>
+                <constraint firstItem="NTP-VS-W1m" firstAttribute="trailing" secondItem="80w-vL-aBO" secondAttribute="trailing" id="RRV-rf-6WN"/>
+                <constraint firstItem="80w-vL-aBO" firstAttribute="top" secondItem="8vB-4r-JqX" secondAttribute="bottom" constant="8" id="Y6O-Np-1PN"/>
+                <constraint firstItem="g19-yH-2Ha" firstAttribute="centerX" secondItem="00S-Uf-WKV" secondAttribute="centerX" id="YOV-NA-TDp"/>
+                <constraint firstItem="8vB-4r-JqX" firstAttribute="top" secondItem="y6x-sr-Yzy" secondAttribute="bottom" constant="30" id="csa-RX-uHv"/>
+                <constraint firstItem="qJM-yc-sDK" firstAttribute="top" secondItem="NTP-VS-W1m" secondAttribute="bottom" constant="30" id="fbh-kv-qPz"/>
+                <constraint firstItem="80w-vL-aBO" firstAttribute="leading" secondItem="8vB-4r-JqX" secondAttribute="leading" id="h7x-Pk-bkf"/>
+                <constraint firstItem="y6x-sr-Yzy" firstAttribute="leading" secondItem="kFw-vB-7YZ" secondAttribute="leading" id="h8I-ce-Kdd"/>
+                <constraint firstItem="NTP-VS-W1m" firstAttribute="top" secondItem="2Ja-ho-bCz" secondAttribute="bottom" constant="8" id="njc-VA-cxQ"/>
+                <constraint firstItem="kFw-vB-7YZ" firstAttribute="top" secondItem="00S-Uf-WKV" secondAttribute="top" id="oIB-n2-4Zt"/>
+                <constraint firstItem="kFw-vB-7YZ" firstAttribute="leading" secondItem="00S-Uf-WKV" secondAttribute="leading" constant="20" id="sy9-oz-C4F"/>
+                <constraint firstItem="8vB-4r-JqX" firstAttribute="leading" secondItem="y6x-sr-Yzy" secondAttribute="leading" id="vfP-wO-k2x"/>
+                <constraint firstItem="qJM-yc-sDK" firstAttribute="leading" secondItem="NTP-VS-W1m" secondAttribute="leading" id="xaT-qX-jRG"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="402.17391304347831" y="-107.8125"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

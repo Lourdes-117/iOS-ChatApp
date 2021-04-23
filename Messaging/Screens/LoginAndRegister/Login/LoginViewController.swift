@@ -12,32 +12,34 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginView: LoginView!
+    @IBOutlet weak var registerView: RegisterView!
     
     let viewModel = LoginControllerViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDelegates()
         initialSetup()
+        setupDelegates()
+    }
+    
+    fileprivate func initialSetup() {
+        loginView.isHidden = false
+        registerView.isHidden = true
+        title = viewModel.pageTitle
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewModel.pageTitle, style: .done, target: self, action: #selector(onTapLoginRegisterSwitchButton))
+        imageViewWidthConstraint.constant = view.frame.width/3
     }
     
     fileprivate func setupDelegates() {
         loginView.delegate = self
     }
     
-    fileprivate func initialSetup() {
-        title = viewModel.loginTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewModel.registerTitle, style: .done, target: self, action: #selector(onTapRegisterButton))
-        imageViewWidthConstraint.constant = view.frame.width/3
-    }
-    
-    @objc func onTapRegisterButton() {
+    @objc func onTapLoginRegisterSwitchButton() {
+        self.dismissKeyboard()
         viewModel.isOnLoginPage.toggle()
-        if viewModel.isOnLoginPage {
-            title = viewModel.loginTitle
-        } else {
-            title = viewModel.registerTitle
-        }
+        title = viewModel.pageTitle
+        loginView.isHidden = viewModel.shouldHideLoginPage
+        registerView.isHidden = viewModel.shouldHideRegisterPage
     }
     
     func presentInvalidFormAlert() {
@@ -47,7 +49,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: LoginViewDelegate {
+extension LoginViewController: LoginRegisterViewDelegate {
     func shouldDismissKeyboard() {
         self.dismissKeyboard()
     }

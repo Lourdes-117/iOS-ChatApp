@@ -9,9 +9,22 @@ import UIKit
 
 class LoginControllerViewModel {
     var isOnLoginPage = true
-    let loginTitle = "Log In"
-    let registerTitle = "Register"
+    private let loginTitle = "Log In"
+    private let registerTitle = "Register"
     let formInvalidAlertTitle = "Whoops!"
     let formInvalidAlertMessage = "Please Enter All Information To Continue"
     let alertDismissMessage = "Dismiss"
+    
+    var pageTitle: String {
+        isOnLoginPage ? loginTitle : registerTitle
+    }
+    var buttonTitle: String {
+        isOnLoginPage ? registerTitle : loginTitle
+    }
+    var shouldHideLoginPage: Bool {
+        isOnLoginPage ? false : true
+    }
+    var shouldHideRegisterPage: Bool {
+        isOnLoginPage ? true : false
+    }
 }

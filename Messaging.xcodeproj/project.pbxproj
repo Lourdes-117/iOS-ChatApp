@@ -20,6 +20,9 @@
 		AE88A88026333AF4003F35DF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A87F26333AF4003F35DF /* LoginView.swift */; };
 		AE88A88426333BA2003F35DF /* ViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88326333BA2003F35DF /* ViewUtility.swift */; };
 		AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88626333D29003F35DF /* LoginViewViewModel.swift */; };
+		AE88A88C26334237003F35DF /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE88A88B26334237003F35DF /* RegisterView.xib */; };
+		AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88E2633436F003F35DF /* RegisterView.swift */; };
+		AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A89126334850003F35DF /* RegisterViewViewModel.swift */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -41,6 +44,9 @@
 		AE88A87F26333AF4003F35DF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AE88A88326333BA2003F35DF /* ViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtility.swift; sourceTree = "<group>"; };
 		AE88A88626333D29003F35DF /* LoginViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewModel.swift; sourceTree = "<group>"; };
+		AE88A88B26334237003F35DF /* RegisterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
+		AE88A88E2633436F003F35DF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		AE88A89126334850003F35DF /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -163,6 +169,9 @@
 		AE88A88A2633415A003F35DF /* RegisterOrganism */ = {
 			isa = PBXGroup;
 			children = (
+				AE88A88B26334237003F35DF /* RegisterView.xib */,
+				AE88A88E2633436F003F35DF /* RegisterView.swift */,
+				AE88A89126334850003F35DF /* RegisterViewViewModel.swift */,
 			);
 			path = RegisterOrganism;
 			sourceTree = "<group>";
@@ -235,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */,
+				AE88A88C26334237003F35DF /* RegisterView.xib in Resources */,
 				AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */,
 				AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
@@ -256,8 +266,10 @@
 				AE4FA9782631F3E3006A3243 /* ConversationViewController.swift in Sources */,
 				AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */,
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
+				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
+				AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */,
 				AE88A88026333AF4003F35DF /* LoginView.swift in Sources */,
 				AE4FA9762631F3E3006A3243 /* SceneDelegate.swift in Sources */,
 			);

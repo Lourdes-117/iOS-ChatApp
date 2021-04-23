@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  Messaging
 //
 //  Created by Lourdes on 4/23/21.
@@ -7,19 +7,16 @@
 
 import UIKit
 
-protocol LoginRegisterViewDelegate: NSObjectProtocol {
-    func shouldDismissKeyboard()
-    func invalidFormSubmitted()
-}
-
-class LoginView: UIView {
-    let kNibName = "LoginView"
+class RegisterView: UIView {
+    let kNibName = "RegisterView"
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var secondNameField: UITextField!
     @IBOutlet weak var emailAddressTextBox: UITextField!
     @IBOutlet weak var passwordTextBox: UITextField!
-
+    
     weak var delegate: LoginRegisterViewDelegate?
     
-    let viewModel = LoginViewViewModel()
+    let viewModel = RegisterViewViewModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +26,12 @@ class LoginView: UIView {
     }
     
     fileprivate func initialSetup() {
+        firstNameField.layer.borderWidth = viewModel.textFieldBorderWidth
+        firstNameField.layer.cornerRadius = viewModel.textFieldBorderRadius
+        firstNameField.layer.borderColor = viewModel.textFieldBorderColor
+        secondNameField.layer.borderWidth = viewModel.textFieldBorderWidth
+        secondNameField.layer.cornerRadius = viewModel.textFieldBorderRadius
+        secondNameField.layer.borderColor = viewModel.textFieldBorderColor
         emailAddressTextBox.layer.borderWidth = viewModel.textFieldBorderWidth
         emailAddressTextBox.layer.cornerRadius = viewModel.textFieldBorderRadius
         emailAddressTextBox.layer.borderColor = viewModel.textFieldBorderColor
@@ -42,6 +45,7 @@ class LoginView: UIView {
         passwordTextBox.delegate = self
         emailAddressTextBox.addTarget(self, action: #selector(emailAddressChange), for: .editingChanged)
         passwordTextBox.addTarget(self, action: #selector(passwordChange), for: .editingChanged)
+        firstNameField.addTarget(self, action: #selector(nameChange(nameTextField:)), for: .editingChanged)
     }
     
     @objc func emailAddressChange() {
@@ -56,25 +60,24 @@ class LoginView: UIView {
         passwordTextBox.layer.borderColor = viewModel.getPasswordBorderColor(forString: password)
     }
     
-    @IBAction func onTapLoginButton(_ sender: Any) {
-        delegate?.shouldDismissKeyboard()
-        passwordChange()
-        emailAddressChange()
-        guard let email = emailAddressTextBox.text,
-              passwordTextBox.text != nil,
-              viewModel.isEmailValid(email) else {
-            delegate?.invalidFormSubmitted()
-            return
-        }
+    @objc func nameChange(nameTextField: UITextField) {
+        print(nameTextField.text)
+    }
+    
+    @IBAction func onTapRegisterButton(_ sender: Any) {
     }
 }
 
-extension LoginView: UITextFieldDelegate {
+extension RegisterView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if emailAddressTextBox.isFirstResponder {
+        if firstNameField.isFirstResponder {
+            secondNameField.becomeFirstResponder()
+        } else if secondNameField.isFirstResponder {
+            emailAddressTextBox.becomeFirstResponder()
+        } else if emailAddressTextBox.isFirstResponder {
             passwordTextBox.becomeFirstResponder()
         } else if passwordTextBox.isFirstResponder {
-            onTapLoginButton(self)
+            onTapRegisterButton(self)
         }
         return true
     }
