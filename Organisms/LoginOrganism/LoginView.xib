@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginView" customModule="Messaging" customModuleProvider="target">
+            <connections>
+                <outlet property="emailAddressTextBox" destination="7dL-VN-PRa" id="hJ4-Yz-2RF"/>
+                <outlet property="passwordTextBox" destination="0KY-80-Kul" id="h9I-SN-fzn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="QCd-d3-y6N">
+            <rect key="frame" x="0.0" y="0.0" width="397" height="256"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tl-XI-e8a">
+                    <rect key="frame" x="20" y="93" width="78" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Email Address..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7dL-VN-PRa">
+                    <rect key="frame" x="20" y="29" width="357" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="continue" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Password..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0KY-80-Kul">
+                    <rect key="frame" x="20" y="122" width="357" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uB6-el-MZ6">
+                    <rect key="frame" x="179.5" y="206" width="38" height="30"/>
+                    <state key="normal" title="Login"/>
+                    <connections>
+                        <action selector="onTapLoginButton:" destination="-1" eventType="touchUpInside" id="iSu-pq-qzP"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSu-KW-SHD">
+                    <rect key="frame" x="20" y="0.0" width="112" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vmJ-ex-kWm"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="7Tl-XI-e8a" firstAttribute="leading" secondItem="7dL-VN-PRa" secondAttribute="leading" id="75a-My-w5j"/>
+                <constraint firstAttribute="trailing" secondItem="7dL-VN-PRa" secondAttribute="trailing" constant="20" id="7bI-69-qkc"/>
+                <constraint firstItem="tSu-KW-SHD" firstAttribute="leading" secondItem="QCd-d3-y6N" secondAttribute="leading" constant="20" id="OwP-RR-tVh"/>
+                <constraint firstItem="uB6-el-MZ6" firstAttribute="centerX" secondItem="0KY-80-Kul" secondAttribute="centerX" id="PKD-NW-nrU"/>
+                <constraint firstItem="0KY-80-Kul" firstAttribute="leading" secondItem="7Tl-XI-e8a" secondAttribute="leading" id="QZI-cN-CDT"/>
+                <constraint firstItem="0KY-80-Kul" firstAttribute="trailing" secondItem="7dL-VN-PRa" secondAttribute="trailing" id="Rj1-xK-L0G"/>
+                <constraint firstItem="tSu-KW-SHD" firstAttribute="top" secondItem="QCd-d3-y6N" secondAttribute="top" id="cod-K5-aWn"/>
+                <constraint firstItem="0KY-80-Kul" firstAttribute="top" secondItem="7Tl-XI-e8a" secondAttribute="bottom" constant="8" id="fV6-rL-ZjI"/>
+                <constraint firstItem="7Tl-XI-e8a" firstAttribute="top" secondItem="7dL-VN-PRa" secondAttribute="bottom" constant="30" id="rl9-lF-Pv4"/>
+                <constraint firstItem="7dL-VN-PRa" firstAttribute="leading" secondItem="tSu-KW-SHD" secondAttribute="leading" id="sl8-Ap-3TQ"/>
+                <constraint firstItem="uB6-el-MZ6" firstAttribute="top" secondItem="0KY-80-Kul" secondAttribute="bottom" constant="50" id="tA2-yl-kB7"/>
+                <constraint firstItem="vmJ-ex-kWm" firstAttribute="bottom" secondItem="uB6-el-MZ6" secondAttribute="bottom" constant="20" id="uUJ-T4-tCD"/>
+                <constraint firstItem="7dL-VN-PRa" firstAttribute="top" secondItem="tSu-KW-SHD" secondAttribute="bottom" constant="8" id="yVk-X7-hzh"/>
+                <constraint firstItem="uB6-el-MZ6" firstAttribute="centerX" secondItem="vmJ-ex-kWm" secondAttribute="centerX" id="yvr-nm-sBR"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="125.36231884057972" y="-89.732142857142847"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
