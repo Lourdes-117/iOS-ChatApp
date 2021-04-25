@@ -14,6 +14,11 @@ class LoginControllerViewModel {
     let formInvalidAlertTitle = "Whoops!"
     let formInvalidAlertMessage = "Please Enter All Information To Continue"
     let alertDismissMessage = "Dismiss"
+    let profilePicSelectionTitle = "Profile Picture"
+    let profilePicSelectionMessage = "How Would You Like To Select Your Picture"
+    let cancel = "Cancel"
+    let takePhoto = "Take Photo"
+    let choosePhoto = "Choose Photo"
     
     var pageTitle: String {
         isOnLoginPage ? loginTitle : registerTitle

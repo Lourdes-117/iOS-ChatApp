@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var registerView: RegisterView!
     @IBOutlet weak var scrollView: UIScrollView!
     var registerOrLoginSwitchButton: UIBarButtonItem?
+    @IBOutlet weak var profilePicView: UIImageView!
     
     let viewModel = LoginControllerViewModel()
     
@@ -43,11 +44,17 @@ class LoginViewController: UIViewController {
         imageViewWidthConstraint.constant = view.frame.width/3
         title = viewModel.pageTitle
         registerOrLoginSwitchButton?.title = viewModel.loginRegisterSwitchButtonTitle
+        profilePicView.layer.masksToBounds = true
     }
     
     fileprivate func setupDelegates() {
         loginView.delegate = self
         registerView.delegate = self
+    }
+    
+    @IBAction func didTapProfilePicture(_ sender: Any) {
+        if viewModel.isOnLoginPage { return }
+        presentPhotoActionSheet()
     }
     
     @objc func onTapLoginRegisterSwitchButton() {
@@ -90,5 +97,48 @@ extension LoginViewController: LoginRegisterViewDelegate {
     
     func invalidFormSubmitted() {
         self.presentInvalidFormAlert()
+    }
+}
+
+extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentPhotoActionSheet() {
+        let actionSheet = UIAlertController(title: viewModel.profilePicSelectionTitle, message: viewModel.profilePicSelectionMessage, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: viewModel.cancel, style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: viewModel.takePhoto, style: .default, handler: {[weak self] _ in
+            self?.presentCamera()
+        }))
+        actionSheet.addAction(UIAlertAction(title: viewModel.choosePhoto, style: .default, handler: {[weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func presentCamera() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .camera
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func presentPhotoPicker() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            profilePicView.image = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

@@ -8,6 +8,11 @@
 import UIKit
 
 extension UIView {
+    
+    func setRoundedCorners() {
+        self.layer.cornerRadius = self.frame.width/2
+    }
+    
     func commonInit(_ nibName: String) {
         guard let view = loadViewFromNib(nibName) else {
             return
