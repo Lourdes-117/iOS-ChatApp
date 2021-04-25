@@ -28,6 +28,10 @@ class LoginView: UIView {
         setupDelegates()
     }
     
+    func resetView() {
+        initialSetup()
+    }
+    
     fileprivate func initialSetup() {
         emailAddressTextBox.layer.borderWidth = viewModel.textFieldBorderWidth
         emailAddressTextBox.layer.cornerRadius = viewModel.textFieldBorderRadius
@@ -35,6 +39,8 @@ class LoginView: UIView {
         passwordTextBox.layer.borderWidth = viewModel.textFieldBorderWidth
         passwordTextBox.layer.cornerRadius = viewModel.textFieldBorderRadius
         passwordTextBox.layer.borderColor = viewModel.textFieldBorderColor
+        emailAddressTextBox.text = nil
+        passwordTextBox.text = nil
     }
     
     fileprivate func setupDelegates() {

@@ -25,6 +25,10 @@ class RegisterView: UIView {
         setupDelegates()
     }
     
+    func resetView() {
+        initialSetup()
+    }
+    
     fileprivate func initialSetup() {
         firstNameField.layer.borderWidth = viewModel.textFieldBorderWidth
         firstNameField.layer.cornerRadius = viewModel.textFieldBorderRadius
@@ -38,6 +42,10 @@ class RegisterView: UIView {
         passwordTextBox.layer.borderWidth = viewModel.textFieldBorderWidth
         passwordTextBox.layer.cornerRadius = viewModel.textFieldBorderRadius
         passwordTextBox.layer.borderColor = viewModel.textFieldBorderColor
+        firstNameField.text = nil
+        secondNameField.text = nil
+        emailAddressTextBox.text = nil
+        passwordTextBox.text = nil
     }
     
     fileprivate func setupDelegates() {

@@ -57,6 +57,8 @@ class LoginViewController: UIViewController {
         registerOrLoginSwitchButton?.title = viewModel.loginRegisterSwitchButtonTitle
         loginView.isHidden = viewModel.shouldHideLoginPage
         registerView.isHidden = viewModel.shouldHideRegisterPage
+        loginView.resetView()
+        registerView.resetView()
     }
     
     func presentInvalidFormAlert() {
