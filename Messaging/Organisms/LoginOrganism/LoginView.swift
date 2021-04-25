@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol LoginRegisterViewDelegate: NSObjectProtocol {
     func shouldDismissKeyboard()
     func invalidFormSubmitted()
+    func successfulLoginOrRegister(email: String, password: String)
 }
 
 class LoginView: UIView {
@@ -67,10 +69,19 @@ class LoginView: UIView {
         passwordChange()
         emailAddressChange()
         guard let email = emailAddressTextBox.text,
-              passwordTextBox.text != nil,
+              let password = passwordTextBox.text,
               viewModel.isEmailValid(email) else {
             delegate?.invalidFormSubmitted()
             return
+        }
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let result = authResult, error == nil else {
+                debugPrint("Login Error")
+                self?.delegate?.invalidFormSubmitted()
+                return
+            }
+            debugPrint(result)
+            self?.delegate?.successfulLoginOrRegister(email: email, password: password)
         }
     }
 }

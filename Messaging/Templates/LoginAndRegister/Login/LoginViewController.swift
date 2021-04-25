@@ -91,6 +91,10 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginRegisterViewDelegate {
+    func successfulLoginOrRegister(email: String, password: String) {
+        print("Success")
+    }
+    
     func shouldDismissKeyboard() {
         self.dismissKeyboard()
     }

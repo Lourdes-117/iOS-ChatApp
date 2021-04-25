@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterView: UIView {
     let kNibName = "RegisterView"
@@ -93,7 +94,15 @@ class RegisterView: UIView {
             delegate?.invalidFormSubmitted()
             return
         }
-        print("Register Success")
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let result = authResult, error == nil else {
+                debugPrint("Regiser Error")
+                self?.delegate?.invalidFormSubmitted()
+                return
+            }
+            debugPrint(result)
+            self?.delegate?.successfulLoginOrRegister(email: email, password: password)
+        }
     }
 }
 
