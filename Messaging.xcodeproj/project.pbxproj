@@ -28,6 +28,13 @@
 		AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */; };
 		AEB745FA263732A700B4C056 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB745F9263732A700B4C056 /* ChatViewController.swift */; };
 		AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB745FD263732C800B4C056 /* ChatViewController.storyboard */; };
+		AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB7460026373A8C00B4C056 /* HomeConversationTableViewCell.xib */; };
+		AEB7460426373AA900B4C056 /* HomeConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7460326373AA900B4C056 /* HomeConversationTableViewCell.swift */; };
+		AEB7460726373C6600B4C056 /* ChatViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7460626373C6600B4C056 /* ChatViewControllerViewModel.swift */; };
+		AEB7460A2637421600B4C056 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB746092637421600B4C056 /* HomeScreenViewModel.swift */; };
+		AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7460E2637432500B4C056 /* NewConversationViewController.swift */; };
+		AEB746132637433300B4C056 /* NewConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB746122637433300B4C056 /* NewConversationViewController.storyboard */; };
+		AEB74617263743F300B4C056 /* NewConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB74616263743F300B4C056 /* NewConversationViewModel.swift */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -59,6 +66,13 @@
 		AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AEB745F9263732A700B4C056 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AEB745FD263732C800B4C056 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
+		AEB7460026373A8C00B4C056 /* HomeConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeConversationTableViewCell.xib; sourceTree = "<group>"; };
+		AEB7460326373AA900B4C056 /* HomeConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeConversationTableViewCell.swift; sourceTree = "<group>"; };
+		AEB7460626373C6600B4C056 /* ChatViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerViewModel.swift; sourceTree = "<group>"; };
+		AEB746092637421600B4C056 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		AEB7460E2637432500B4C056 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
+		AEB746122637433300B4C056 /* NewConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewConversationViewController.storyboard; sourceTree = "<group>"; };
+		AEB74616263743F300B4C056 /* NewConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -129,9 +143,10 @@
 		AE4FA98A2631F50B006A3243 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				AEB745F82637327100B4C056 /* ChatViewController */,
-				AE4FA98B2631F514006A3243 /* HomeScreen */,
 				AE4FA98F2631F629006A3243 /* LoginAndRegister */,
+				AE4FA98B2631F514006A3243 /* HomeScreen */,
+				AEB745F82637327100B4C056 /* ChatViewController */,
+				AEB7460D263742F500B4C056 /* NewConversationController */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -139,8 +154,9 @@
 		AE4FA98B2631F514006A3243 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				AE4FA9772631F3E3006A3243 /* HomeViewController.swift */,
 				AE4FA9792631F3E3006A3243 /* HomeViewController.storyboard */,
+				AE4FA9772631F3E3006A3243 /* HomeViewController.swift */,
+				AEB746092637421600B4C056 /* HomeScreenViewModel.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -223,6 +239,8 @@
 		AEB745F7263731B200B4C056 /* HomeConversationTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				AEB7460026373A8C00B4C056 /* HomeConversationTableViewCell.xib */,
+				AEB7460326373AA900B4C056 /* HomeConversationTableViewCell.swift */,
 			);
 			path = HomeConversationTableViewCell;
 			sourceTree = "<group>";
@@ -230,10 +248,21 @@
 		AEB745F82637327100B4C056 /* ChatViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AEB745F9263732A700B4C056 /* ChatViewController.swift */,
 				AEB745FD263732C800B4C056 /* ChatViewController.storyboard */,
+				AEB745F9263732A700B4C056 /* ChatViewController.swift */,
+				AEB7460626373C6600B4C056 /* ChatViewControllerViewModel.swift */,
 			);
 			path = ChatViewController;
+			sourceTree = "<group>";
+		};
+		AEB7460D263742F500B4C056 /* NewConversationController */ = {
+			isa = PBXGroup;
+			children = (
+				AEB746122637433300B4C056 /* NewConversationViewController.storyboard */,
+				AEB7460E2637432500B4C056 /* NewConversationViewController.swift */,
+				AEB74616263743F300B4C056 /* NewConversationViewModel.swift */,
+			);
+			path = NewConversationController;
 			sourceTree = "<group>";
 		};
 		AEFBA8AC263214600052D150 /* Utilities */ = {
@@ -306,12 +335,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */,
+				AEB746132637433300B4C056 /* NewConversationViewController.storyboard in Resources */,
 				AE88A88C26334237003F35DF /* RegisterView.xib in Resources */,
 				AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */,
 				AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */,
 				AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
 				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
+				AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */,
 				AE9DCD5E26361005003AFF71 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,14 +402,19 @@
 				AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */,
 				AE4FA9782631F3E3006A3243 /* HomeViewController.swift in Sources */,
 				AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */,
+				AEB74617263743F300B4C056 /* NewConversationViewModel.swift in Sources */,
 				AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */,
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
 				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
+				AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
+				AEB7460726373C6600B4C056 /* ChatViewControllerViewModel.swift in Sources */,
 				AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */,
 				AE88A88026333AF4003F35DF /* LoginView.swift in Sources */,
+				AEB7460426373AA900B4C056 /* HomeConversationTableViewCell.swift in Sources */,
 				AEB745FA263732A700B4C056 /* ChatViewController.swift in Sources */,
+				AEB7460A2637421600B4C056 /* HomeScreenViewModel.swift in Sources */,
 				AE4FA9762631F3E3006A3243 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Conversation View Controller-->
+        <scene sceneID="7PF-0E-mTU">
+            <objects>
+                <viewController storyboardIdentifier="NewConversationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7QQ-It-4Mv" customClass="NewConversationViewController" customModule="Messaging" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N7Q-uA-0hq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search For Users..." translatesAutoresizingMaskIntoConstraints="NO" id="HFM-Tm-RYs">
+                                <rect key="frame" x="15" y="52" width="384" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Olg-0k-Yyn">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="l8G-fe-NPb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Olg-0k-Yyn" firstAttribute="leading" secondItem="l8G-fe-NPb" secondAttribute="leading" id="6cQ-Uk-iwm"/>
+                            <constraint firstItem="l8G-fe-NPb" firstAttribute="trailing" secondItem="Olg-0k-Yyn" secondAttribute="trailing" id="76j-AE-4XC"/>
+                            <constraint firstItem="HFM-Tm-RYs" firstAttribute="top" secondItem="l8G-fe-NPb" secondAttribute="top" constant="8" id="QdB-o2-fpO"/>
+                            <constraint firstItem="Olg-0k-Yyn" firstAttribute="top" secondItem="HFM-Tm-RYs" secondAttribute="bottom" id="UA8-TS-wKI"/>
+                            <constraint firstAttribute="trailing" secondItem="HFM-Tm-RYs" secondAttribute="trailing" constant="15" id="YKu-PF-1TM"/>
+                            <constraint firstItem="HFM-Tm-RYs" firstAttribute="leading" secondItem="l8G-fe-NPb" secondAttribute="leading" constant="15" id="ZXr-IZ-OtH"/>
+                            <constraint firstItem="l8G-fe-NPb" firstAttribute="bottom" secondItem="Olg-0k-Yyn" secondAttribute="bottom" id="gwG-Vj-WI4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="HFM-Tm-RYs" id="BYD-1d-JvB"/>
+                        <outlet property="tableView" destination="Olg-0k-Yyn" id="RuZ-v7-8sz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UcI-16-FlE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="86"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
