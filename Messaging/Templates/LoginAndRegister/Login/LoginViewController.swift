@@ -141,6 +141,22 @@ extension LoginViewController: LoginRegisterViewDelegate {
             return
         }
         debugPrint("Signin Successful")
+        guard let window = UIApplication.shared.windows.first else {
+            self.presentInvalidFormAlert(title: viewModel.error,
+                                         message: viewModel.pleaseTryAgain)
+            return
+        }
+        UIView.animate(withDuration: kAnimationDuration) {  [weak self] in
+            self?.view.alpha = 0
+        }
+        let mainStoryBoard = UIStoryboard(name: HomeViewController.kIdentifier, bundle: nil)
+            let viewController = mainStoryBoard.instantiateViewController(withIdentifier: HomeViewController.kIdentifier)
+        viewController.view.alpha = 0
+        let navController = UINavigationController(rootViewController: viewController)
+            window.rootViewController = navController
+        UIView.animate(withDuration: kAnimationDuration) {
+            viewController.view.alpha = 1
+        }
     }
 }
 

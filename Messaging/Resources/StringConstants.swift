@@ -6,6 +6,8 @@
 //
 import Foundation
 
+let kAnimationDuration: TimeInterval = 0.25
+
 class StringConstants {
     private static var instance: StringConstants?
     private init() {}
