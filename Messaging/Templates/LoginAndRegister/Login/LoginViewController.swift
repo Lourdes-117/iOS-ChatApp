@@ -131,12 +131,27 @@ extension LoginViewController: LoginRegisterViewDelegate {
                     }
                     debugPrint(result)
                 }
-                DatabaseManager.shared.insertUser(with: user)
-                FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
-                    self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
-                }
-                DispatchQueue.main.async {
-                    self?.spinner.dismiss()
+                DatabaseManager.shared.insertUser(with: user) { (success) in
+                    if success {
+                        guard let imageData = self?.profilePicView.image?.pngData() else { return }
+                        let fileName = user.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: imageData,
+                                                                   fileName: fileName) { (result) in
+                            switch result {
+                            case .success(let downloaUrl):
+                                UserDefaults.standard.setValue(downloaUrl, forKey: StringConstants.shared.userDefaults.profilePicurl)
+                                //Sign in after all uploads are successful
+                                FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
+                                    self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+                                    DispatchQueue.main.async {
+                                        self?.spinner.dismiss()
+                                    }
+                                }
+                            case .failure(let error):
+                                debugPrint(error)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -158,7 +173,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
             return
         }
         debugPrint("Signin Successful")
-        guard let window = UIApplication.shared.windows.first else {
+        guard let window = UIApplication.shared.windows.first, FirebaseAuth.Auth.auth().currentUser != nil else {
             self.presentInvalidFormAlert(title: viewModel.error,
                                          message: viewModel.pleaseTryAgain)
             return

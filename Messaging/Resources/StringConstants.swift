@@ -20,6 +20,7 @@ class StringConstants {
     }
     
     //Constants
+    let userDefaults = UserDefaultConstants()
     let database = DatabaseConstants()
     let regex = Regex()
 }
@@ -28,6 +29,11 @@ class StringConstants {
 struct DatabaseConstants {
     let firstName = "first_name"
     let lastName = "last_name"
+}
+
+///Use Through StringConstants shared Instance
+struct UserDefaultConstants {
+    let profilePicurl = "profile_picture_url"
 }
 
 ///Use Through StringConstants shared Instance

@@ -28,9 +28,16 @@ extension DatabaseManager {
     }
     
     ///Inserts New User To Database
-    public func insertUser(with user: ChatAppUserModel) {
+    public func insertUser(with user: ChatAppUserModel, completion: @escaping (Bool)-> Void ) {
         database.child(user.safeEmail).setValue([
                                                     StringConstants.shared.database.firstName: user.firstName,
-                                                    StringConstants.shared.database.lastName: user.lastName])
+                                                    StringConstants.shared.database.lastName: user.lastName]) { (error, databaseReference) in
+            guard error == nil else {
+                print("Failed To Write To Databae")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
 }
