@@ -58,15 +58,7 @@ class LoginView: UIView {
             delegate?.invalidFormSubmitted()
             return
         }
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
-            guard let result = authResult, error == nil else {
-                debugPrint("Login Error")
-                self?.delegate?.invalidFormSubmitted()
-                return
-            }
-            debugPrint(result)
-            self?.delegate?.successfulLoginOrRegister(email: email, password: password, firstName: nil, lastName: nil)
-        }
+        self.delegate?.successfulLoginOrRegister(email: email, password: password, firstName: nil, lastName: nil)
     }
 }
 

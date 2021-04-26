@@ -94,8 +94,12 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginRegisterViewDelegate {
     func successfulLoginOrRegister(email: String, password: String, firstName: String?, lastName: String?) {
         if viewModel.isOnLoginPage {
-            //Login Stuff
+            //Login
+            FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authDataResult, error) in
+                self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+            }
         } else {
+            //Register
             guard let first = firstName,
                   let last = lastName else { return }
             let user = ChatAppUserModel(firstName: first,
@@ -113,11 +117,9 @@ extension LoginViewController: LoginRegisterViewDelegate {
                     }
                     debugPrint(result)
                 }
-                if let firstName = firstName, let lastName = lastName {
-                    let user = ChatAppUserModel(firstName: firstName,
-                                                lastName: lastName,
-                                                emailAddress: email)
-                    DatabaseManager.shared.insertUser(with: user)
+                DatabaseManager.shared.insertUser(with: user)
+                FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
+                    self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
                 }
             }
         }
@@ -129,6 +131,16 @@ extension LoginViewController: LoginRegisterViewDelegate {
     
     func invalidFormSubmitted() {
         self.presentInvalidFormAlert()
+    }
+    
+    func didSignInSuccessfully(authDataResult: AuthDataResult?, error: Error?) {
+        if authDataResult != nil, let error = error {
+            debugPrint(error)
+            self.presentInvalidFormAlert(title: viewModel.error,
+                                         message: viewModel.pleaseTryAgain)
+            return
+        }
+        debugPrint("Signin Successful")
     }
 }
 
