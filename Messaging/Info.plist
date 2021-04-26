@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Pleae Allow Access To Take A Profile Picture</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please Allow Access To Select A Photo For Your Profile</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -34,7 +38,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>ConversationViewController</string>
+					<string>HomeViewController</string>
 				</dict>
 			</array>
 		</dict>
@@ -44,7 +48,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>ConversationViewController</string>
+	<string>HomeViewController</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -60,9 +64,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Pleae Allow Access To Take A Profile Picture</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please Allow Access To Select A Photo For Your Profile</string>
 </dict>
 </plist>

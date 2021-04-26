@@ -10,8 +10,8 @@
 		7B4AA7A80DDBA789E2405822 /* Pods_Messaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26714A36D44B52E8F18B004A /* Pods_Messaging.framework */; };
 		AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9732631F3E3006A3243 /* AppDelegate.swift */; };
 		AE4FA9762631F3E3006A3243 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9752631F3E3006A3243 /* SceneDelegate.swift */; };
-		AE4FA9782631F3E3006A3243 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9772631F3E3006A3243 /* ConversationViewController.swift */; };
-		AE4FA97B2631F3E3006A3243 /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA9792631F3E3006A3243 /* ConversationViewController.storyboard */; };
+		AE4FA9782631F3E3006A3243 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9772631F3E3006A3243 /* HomeViewController.swift */; };
+		AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA9792631F3E3006A3243 /* HomeViewController.storyboard */; };
 		AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA97C2631F3E5006A3243 /* Assets.xcassets */; };
 		AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA97E2631F3E5006A3243 /* LaunchScreen.storyboard */; };
 		AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9902631F637006A3243 /* LoginViewController.swift */; };
@@ -25,6 +25,7 @@
 		AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88E2633436F003F35DF /* RegisterView.swift */; };
 		AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A89126334850003F35DF /* RegisterViewViewModel.swift */; };
 		AE9DCD5E26361005003AFF71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE9DCD5D26361005003AFF71 /* GoogleService-Info.plist */; };
+		AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -37,8 +38,8 @@
 		AE4FA9702631F3E3006A3243 /* Messaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE4FA9732631F3E3006A3243 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE4FA9752631F3E3006A3243 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AE4FA9772631F3E3006A3243 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
-		AE4FA97A2631F3E3006A3243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ConversationViewController.storyboard; sourceTree = "<group>"; };
+		AE4FA9772631F3E3006A3243 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AE4FA97A2631F3E3006A3243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HomeViewController.storyboard; sourceTree = "<group>"; };
 		AE4FA97C2631F3E5006A3243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE4FA97F2631F3E5006A3243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE4FA9812631F3E5006A3243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		AE88A88E2633436F003F35DF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AE88A89126334850003F35DF /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		AE9DCD5D26361005003AFF71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				AE4FA98C2631F528006A3243 /* Lifecycle */,
 				AE4FA98A2631F50B006A3243 /* Templates */,
 				AE88A87A26333A8A003F35DF /* Organisms */,
+				AE9DCD8226361DAA003AFF71 /* Managers */,
 				AEFBA8AC263214600052D150 /* Utilities */,
 				AE4FA98D2631F534006A3243 /* Resources */,
 				AE4FA9812631F3E5006A3243 /* Info.plist */,
@@ -122,19 +125,19 @@
 		AE4FA98A2631F50B006A3243 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				AE4FA98B2631F514006A3243 /* MainScreen */,
+				AE4FA98B2631F514006A3243 /* HomeScreen */,
 				AE4FA98F2631F629006A3243 /* LoginAndRegister */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
 		};
-		AE4FA98B2631F514006A3243 /* MainScreen */ = {
+		AE4FA98B2631F514006A3243 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				AE4FA9772631F3E3006A3243 /* ConversationViewController.swift */,
-				AE4FA9792631F3E3006A3243 /* ConversationViewController.storyboard */,
+				AE4FA9772631F3E3006A3243 /* HomeViewController.swift */,
+				AE4FA9792631F3E3006A3243 /* HomeViewController.storyboard */,
 			);
-			path = MainScreen;
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		AE4FA98C2631F528006A3243 /* Lifecycle */ = {
@@ -201,6 +204,14 @@
 				AE88A89126334850003F35DF /* RegisterViewViewModel.swift */,
 			);
 			path = RegisterOrganism;
+			sourceTree = "<group>";
+		};
+		AE9DCD8226361DAA003AFF71 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		AEFBA8AC263214600052D150 /* Utilities */ = {
@@ -277,7 +288,7 @@
 				AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */,
 				AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
-				AE4FA97B2631F3E3006A3243 /* ConversationViewController.storyboard in Resources */,
+				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
 				AE9DCD5E26361005003AFF71 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,8 +346,9 @@
 				AE88A88426333BA2003F35DF /* ViewUtility.swift in Sources */,
 				AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */,
 				AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */,
-				AE4FA9782631F3E3006A3243 /* ConversationViewController.swift in Sources */,
+				AE4FA9782631F3E3006A3243 /* HomeViewController.swift in Sources */,
 				AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */,
+				AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */,
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
 				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
@@ -350,12 +362,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AE4FA9792631F3E3006A3243 /* ConversationViewController.storyboard */ = {
+		AE4FA9792631F3E3006A3243 /* HomeViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AE4FA97A2631F3E3006A3243 /* Base */,
 			);
-			name = ConversationViewController.storyboard;
+			name = HomeViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		AE4FA97E2631F3E5006A3243 /* LaunchScreen.storyboard */ = {
@@ -420,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -475,7 +487,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

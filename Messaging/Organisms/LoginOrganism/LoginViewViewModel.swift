@@ -23,14 +23,5 @@ class LoginViewViewModel {
     func getEmailBorderColor(forString email: String) -> CGColor {
         isEmailValid(email) ? greenColor : redColor
     }
-    
-    func getPasswordBorderColor(forString password: String) -> CGColor {
-        if password.matchesRegex(StringConstants.shared.regex.strongPassword) {
-            return greenColor
-        } else if password.hasUpperCase && password.hasLowerCase {
-            return yellowColor
-        } else {
-            return redColor
-        }
-    }
+
 }

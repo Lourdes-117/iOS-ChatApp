@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,13 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     fileprivate func configureInitialViewcontroller() {
-        let isLoggedIn = UserDefaults.standard.bool(forKey: StringConstants.shared.userDefaults.loggedIn)
-        if !isLoggedIn {
-            let mainStoryBoard = UIStoryboard(name: LoginViewController.identifier, bundle: nil)
-                let loginViewController = mainStoryBoard.instantiateViewController(withIdentifier: LoginViewController.identifier)
-            let navController = UINavigationController(rootViewController: loginViewController)
-                window?.rootViewController = navController
+        var viewControllerIdentifier: String = HomeViewController.kIdentifier
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            viewControllerIdentifier = LoginViewController.kIdentifier
         }
+        
+        let mainStoryBoard = UIStoryboard(name: viewControllerIdentifier, bundle: nil)
+            let viewController = mainStoryBoard.instantiateViewController(withIdentifier: viewControllerIdentifier)
+        let navController = UINavigationController(rootViewController: viewController)
+            window?.rootViewController = navController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

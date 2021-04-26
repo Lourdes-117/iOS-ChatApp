@@ -6,6 +6,17 @@
 //
 
 import UIKit
+struct ChatAppUserModel {
+    let firstName: String
+    let lastName: String
+    let emailAddress: String
+//    let profilePicUrl: String
+    var safeEmail: String {
+        var email = emailAddress.replacingOccurrences(of: "@", with: "!")
+        email = emailAddress.replacingOccurrences(of: ".", with: "^")
+        return email
+    }
+}
 
 class LoginControllerViewModel {
     var isOnLoginPage = true
@@ -19,6 +30,10 @@ class LoginControllerViewModel {
     let cancel = "Cancel"
     let takePhoto = "Take Photo"
     let choosePhoto = "Choose Photo"
+    let userExistsTitle = "User Exists"
+    let userExistsMessage = "Looks like An Account For That Email Already exists"
+    let error = "Error"
+    let pleaseTryAgain = "Please Try Again"
     
     var pageTitle: String {
         isOnLoginPage ? loginTitle : registerTitle

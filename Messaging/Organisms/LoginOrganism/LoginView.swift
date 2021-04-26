@@ -11,7 +11,7 @@ import FirebaseAuth
 protocol LoginRegisterViewDelegate: NSObjectProtocol {
     func shouldDismissKeyboard()
     func invalidFormSubmitted()
-    func successfulLoginOrRegister(email: String, password: String)
+    func successfulLoginOrRegister(email: String, password: String, firstName: String?, lastName: String?)
 }
 
 class LoginView: UIView {
@@ -48,26 +48,10 @@ class LoginView: UIView {
     fileprivate func setupDelegates() {
         emailAddressTextBox.delegate = self
         passwordTextBox.delegate = self
-        emailAddressTextBox.addTarget(self, action: #selector(emailAddressChange), for: .editingChanged)
-        passwordTextBox.addTarget(self, action: #selector(passwordChange), for: .editingChanged)
-    }
-    
-    @objc func emailAddressChange() {
-        let emailText = emailAddressTextBox.text
-        guard let email = emailText else { return }
-        emailAddressTextBox.layer.borderColor = viewModel.getEmailBorderColor(forString: email)
-    }
-    
-    @objc func passwordChange() {
-        let passwordText = passwordTextBox.text
-        guard let password = passwordText else { return }
-        passwordTextBox.layer.borderColor = viewModel.getPasswordBorderColor(forString: password)
     }
     
     @IBAction func onTapLoginButton(_ sender: Any) {
         delegate?.shouldDismissKeyboard()
-        passwordChange()
-        emailAddressChange()
         guard let email = emailAddressTextBox.text,
               let password = passwordTextBox.text,
               viewModel.isEmailValid(email) else {
@@ -81,7 +65,7 @@ class LoginView: UIView {
                 return
             }
             debugPrint(result)
-            self?.delegate?.successfulLoginOrRegister(email: email, password: password)
+            self?.delegate?.successfulLoginOrRegister(email: email, password: password, firstName: nil, lastName: nil)
         }
     }
 }

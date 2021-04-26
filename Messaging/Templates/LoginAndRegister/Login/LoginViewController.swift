@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
-    static let identifier = "LoginViewController"
+    static let kIdentifier = "LoginViewController"
     
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginView: LoginView!
@@ -68,8 +69,8 @@ class LoginViewController: UIViewController {
         registerView.resetView()
     }
     
-    func presentInvalidFormAlert() {
-        let alert = UIAlertController(title: viewModel.formInvalidAlertTitle, message: viewModel.formInvalidAlertMessage , preferredStyle: .alert)
+    func presentInvalidFormAlert(title: String? = nil, message: String? = nil) {
+        let alert = UIAlertController(title: title ?? viewModel.formInvalidAlertTitle, message: message ?? viewModel.formInvalidAlertMessage , preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: viewModel.alertDismissMessage, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -91,8 +92,35 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginRegisterViewDelegate {
-    func successfulLoginOrRegister(email: String, password: String) {
-        print("Success")
+    func successfulLoginOrRegister(email: String, password: String, firstName: String?, lastName: String?) {
+        if viewModel.isOnLoginPage {
+            //Login Stuff
+        } else {
+            guard let first = firstName,
+                  let last = lastName else { return }
+            let user = ChatAppUserModel(firstName: first,
+                                        lastName: last,
+                                        emailAddress: email)
+            DatabaseManager.shared.doesUserExist(with: user.safeEmail) { [weak self] (doesExist) in
+                if doesExist {
+                    self?.presentInvalidFormAlert(title: self?.viewModel.userExistsTitle, message: self?.viewModel.userExistsMessage)
+                    return
+                }
+                FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
+                    guard let result = authResult, error == nil else {
+                        self?.presentInvalidFormAlert(title: self?.viewModel.error, message: self?.viewModel.pleaseTryAgain)
+                        return
+                    }
+                    debugPrint(result)
+                }
+                if let firstName = firstName, let lastName = lastName {
+                    let user = ChatAppUserModel(firstName: firstName,
+                                                lastName: lastName,
+                                                emailAddress: email)
+                    DatabaseManager.shared.insertUser(with: user)
+                }
+            }
+        }
     }
     
     func shouldDismissKeyboard() {

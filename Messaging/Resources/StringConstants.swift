@@ -18,13 +18,14 @@ class StringConstants {
     }
     
     //Constants
-    let userDefaults = UserDefaultConstants()
+    let database = DatabaseConstants()
     let regex = Regex()
 }
 
 ///Use Through StringConstants shared Instance
-struct UserDefaultConstants {
-    let loggedIn = "loggedIn"
+struct DatabaseConstants {
+    let firstName = "first_name"
+    let lastName = "last_name"
 }
 
 ///Use Through StringConstants shared Instance

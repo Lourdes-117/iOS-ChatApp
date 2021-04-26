@@ -94,15 +94,7 @@ class RegisterView: UIView {
             delegate?.invalidFormSubmitted()
             return
         }
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
-            guard let result = authResult, error == nil else {
-                debugPrint("Regiser Error")
-                self?.delegate?.invalidFormSubmitted()
-                return
-            }
-            debugPrint(result)
-            self?.delegate?.successfulLoginOrRegister(email: email, password: password)
-        }
+        self.delegate?.successfulLoginOrRegister(email: email, password: password, firstName: firstName, lastName: secondName)
     }
 }
 
