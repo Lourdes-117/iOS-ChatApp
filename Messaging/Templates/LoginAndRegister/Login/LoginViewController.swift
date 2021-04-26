@@ -7,9 +7,12 @@
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     static let kIdentifier = "LoginViewController"
+    
+    private let spinner = JGProgressHUD(style: .dark)
     
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginView: LoginView!
@@ -95,11 +98,16 @@ extension LoginViewController: LoginRegisterViewDelegate {
     func successfulLoginOrRegister(email: String, password: String, firstName: String?, lastName: String?) {
         if viewModel.isOnLoginPage {
             //Login
+            spinner.show(in: view)
             FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authDataResult, error) in
                 self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+                DispatchQueue.main.async {
+                    self?.spinner.dismiss()
+                }
             }
         } else {
             //Register
+            spinner.show(in: view)
             guard let first = firstName,
                   let last = lastName else { return }
             let user = ChatAppUserModel(firstName: first,
@@ -108,11 +116,17 @@ extension LoginViewController: LoginRegisterViewDelegate {
             DatabaseManager.shared.doesUserExist(with: user.safeEmail) { [weak self] (doesExist) in
                 if doesExist {
                     self?.presentInvalidFormAlert(title: self?.viewModel.userExistsTitle, message: self?.viewModel.userExistsMessage)
+                    DispatchQueue.main.async {
+                        self?.spinner.dismiss()
+                    }
                     return
                 }
                 FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
                     guard let result = authResult, error == nil else {
                         self?.presentInvalidFormAlert(title: self?.viewModel.error, message: self?.viewModel.pleaseTryAgain)
+                        DispatchQueue.main.async {
+                            self?.spinner.dismiss()
+                        }
                         return
                     }
                     debugPrint(result)
@@ -120,6 +134,9 @@ extension LoginViewController: LoginRegisterViewDelegate {
                 DatabaseManager.shared.insertUser(with: user)
                 FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
                     self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+                }
+                DispatchQueue.main.async {
+                    self?.spinner.dismiss()
                 }
             }
         }
@@ -134,7 +151,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
     }
     
     func didSignInSuccessfully(authDataResult: AuthDataResult?, error: Error?) {
-        if authDataResult != nil, let error = error {
+        if authDataResult == nil, let error = error {
             debugPrint(error)
             self.presentInvalidFormAlert(title: viewModel.error,
                                          message: viewModel.pleaseTryAgain)
@@ -146,7 +163,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
                                          message: viewModel.pleaseTryAgain)
             return
         }
-        UIView.animate(withDuration: kAnimationDuration) { [weak self] in
+        UIView.animate(withDuration: kAnimationDuration*5) { [weak self] in
             self?.view.alpha = 0
         } completion: { (_) in
             let mainStoryBoard = UIStoryboard(name: HomeViewController.kIdentifier, bundle: nil)
