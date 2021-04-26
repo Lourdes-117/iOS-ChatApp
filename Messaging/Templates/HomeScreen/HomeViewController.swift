@@ -17,7 +17,18 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        initialSetup()
+    }
+    
+    private func initialSetup() {
+        self.title = "Chats"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        registerCells()
         setupDataSourceDelegate()
+    }
+    
+    private func registerCells() {
+        
     }
     
     private func setupDataSourceDelegate() {
@@ -42,7 +53,9 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let chatViewController = ChatViewController()
+        let chatStoryboard = UIStoryboard(name: ChatViewController.kIdentifier, bundle: nil)
+        let chatViewController = chatStoryboard.instantiateViewController(withIdentifier: ChatViewController.kIdentifier)
+    
         chatViewController.title = "Some Name"
         chatViewController.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(chatViewController, animated: true)
