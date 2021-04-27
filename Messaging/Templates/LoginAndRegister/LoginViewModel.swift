@@ -12,7 +12,7 @@ struct ChatAppUserModel {
     let emailAddress: String
     
     var profilePictureFileName: String {
-        return "\(DatabaseManager.getSafeEmail(from: emailAddress))_profile_picture.png"
+        return "\(DatabaseManager.getSafeEmail(from: emailAddress))\(StringConstants.shared.storage.profilePicture)"
     }
 }
 

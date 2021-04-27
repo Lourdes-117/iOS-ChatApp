@@ -23,6 +23,7 @@ class StringConstants {
     let userDefaults = UserDefaultConstants()
     let database = DatabaseConstants()
     let regex = Regex()
+    let storage = StorageConstants()
 }
 
 ///Use Through StringConstants shared Instance
@@ -37,6 +38,12 @@ struct UserDefaultConstants {
     let email = "email_address"
     let firstName = "first_name"
     let lastName = "last_name"
+}
+
+///Use Through StringConstants shared Instance
+struct StorageConstants {
+    let imagesPath = "images/"
+    let profilePicture = "_profile_picture.png"
 }
 
 ///Use Through StringConstants shared Instance
