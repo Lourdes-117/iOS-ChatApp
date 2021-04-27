@@ -11,6 +11,8 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Firebase/Analytics'
+pod 'Firebase/Crashlytics'
+pod 'Firebase/Performance'
 
 pod 'MessageKit'
 pod 'JGProgressHUD'

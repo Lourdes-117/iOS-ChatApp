@@ -24,7 +24,6 @@
 		AE88A88C26334237003F35DF /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE88A88B26334237003F35DF /* RegisterView.xib */; };
 		AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88E2633436F003F35DF /* RegisterView.swift */; };
 		AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A89126334850003F35DF /* RegisterViewViewModel.swift */; };
-		AE9DCD5E26361005003AFF71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE9DCD5D26361005003AFF71 /* GoogleService-Info.plist */; };
 		AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */; };
 		AEB745FA263732A700B4C056 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB745F9263732A700B4C056 /* ChatViewController.swift */; };
 		AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB745FD263732C800B4C056 /* ChatViewController.storyboard */; };
@@ -36,6 +35,7 @@
 		AEB746132637433300B4C056 /* NewConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB746122637433300B4C056 /* NewConversationViewController.storyboard */; };
 		AEB74617263743F300B4C056 /* NewConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB74616263743F300B4C056 /* NewConversationViewModel.swift */; };
 		AEB7463226374A7A00B4C056 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7463126374A7A00B4C056 /* StorageManager.swift */; };
+		AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEF1111E2638A1AF001D34E1 /* GoogleService-Info.plist */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -63,7 +63,6 @@
 		AE88A88B26334237003F35DF /* RegisterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
 		AE88A88E2633436F003F35DF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AE88A89126334850003F35DF /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
-		AE9DCD5D26361005003AFF71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AEB745F9263732A700B4C056 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AEB745FD263732C800B4C056 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		AEB746122637433300B4C056 /* NewConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewConversationViewController.storyboard; sourceTree = "<group>"; };
 		AEB74616263743F300B4C056 /* NewConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewModel.swift; sourceTree = "<group>"; };
 		AEB7463126374A7A00B4C056 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		AEF1111E2638A1AF001D34E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 				AEFBA8AC263214600052D150 /* Utilities */,
 				AE4FA98D2631F534006A3243 /* Resources */,
 				AE4FA9812631F3E5006A3243 /* Info.plist */,
-				AE9DCD5D26361005003AFF71 /* GoogleService-Info.plist */,
+				AEF1111E2638A1AF001D34E1 /* GoogleService-Info.plist */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -344,9 +344,9 @@
 				AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */,
 				AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
+				AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */,
 				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
 				AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */,
-				AE9DCD5E26361005003AFF71 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
