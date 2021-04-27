@@ -36,6 +36,11 @@
 		AEB74617263743F300B4C056 /* NewConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB74616263743F300B4C056 /* NewConversationViewModel.swift */; };
 		AEB7463226374A7A00B4C056 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7463126374A7A00B4C056 /* StorageManager.swift */; };
 		AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEF1111E2638A1AF001D34E1 /* GoogleService-Info.plist */; };
+		AEF111262638A774001D34E1 /* HomeTabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF111252638A774001D34E1 /* HomeTabBarController.storyboard */; };
+		AEF111292638A783001D34E1 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF111282638A783001D34E1 /* HomeTabBarController.swift */; };
+		AEF1112D2638AAC8001D34E1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */; };
+		AEF111302638AAD4001D34E1 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */; };
+		AEF111332638ADC9001D34E1 /* ProfileViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -75,6 +80,11 @@
 		AEB74616263743F300B4C056 /* NewConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewModel.swift; sourceTree = "<group>"; };
 		AEB7463126374A7A00B4C056 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		AEF1111E2638A1AF001D34E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AEF111252638A774001D34E1 /* HomeTabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTabBarController.storyboard; sourceTree = "<group>"; };
+		AEF111282638A783001D34E1 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
+		AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -146,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				AE4FA98F2631F629006A3243 /* LoginAndRegister */,
-				AE4FA98B2631F514006A3243 /* HomeScreen */,
+				AEF111212638A58F001D34E1 /* TabBarController */,
 				AEB745F82637327100B4C056 /* ChatViewController */,
 				AEB7460D263742F500B4C056 /* NewConversationController */,
 			);
@@ -185,19 +195,11 @@
 		AE4FA98F2631F629006A3243 /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
-				AE88A872263338ED003F35DF /* Login */,
-			);
-			path = LoginAndRegister;
-			sourceTree = "<group>";
-		};
-		AE88A872263338ED003F35DF /* Login */ = {
-			isa = PBXGroup;
-			children = (
 				AEFBA8A8263209170052D150 /* LoginViewModel.swift */,
 				AE4FA9902631F637006A3243 /* LoginViewController.swift */,
 				AE4FA9942631F675006A3243 /* LoginViewController.storyboard */,
 			);
-			path = Login;
+			path = LoginAndRegister;
 			sourceTree = "<group>";
 		};
 		AE88A87A26333A8A003F35DF /* Organisms */ = {
@@ -266,6 +268,27 @@
 				AEB74616263743F300B4C056 /* NewConversationViewModel.swift */,
 			);
 			path = NewConversationController;
+			sourceTree = "<group>";
+		};
+		AEF111212638A58F001D34E1 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				AEF111232638A5C8001D34E1 /* ProfileViewController */,
+				AE4FA98B2631F514006A3243 /* HomeScreen */,
+				AEF111252638A774001D34E1 /* HomeTabBarController.storyboard */,
+				AEF111282638A783001D34E1 /* HomeTabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		AEF111232638A5C8001D34E1 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */,
+				AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */,
+				AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */,
+			);
+			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
 		AEFBA8AC263214600052D150 /* Utilities */ = {
@@ -339,6 +362,7 @@
 			files = (
 				AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */,
 				AEB746132637433300B4C056 /* NewConversationViewController.storyboard in Resources */,
+				AEF111302638AAD4001D34E1 /* ProfileViewController.storyboard in Resources */,
 				AE88A88C26334237003F35DF /* RegisterView.xib in Resources */,
 				AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */,
 				AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */,
@@ -346,6 +370,7 @@
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
 				AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */,
 				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
+				AEF111262638A774001D34E1 /* HomeTabBarController.storyboard in Resources */,
 				AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +426,8 @@
 			files = (
 				AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */,
 				AE88A88426333BA2003F35DF /* ViewUtility.swift in Sources */,
+				AEF111292638A783001D34E1 /* HomeTabBarController.swift in Sources */,
+				AEF111332638ADC9001D34E1 /* ProfileViewControllerViewModel.swift in Sources */,
 				AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */,
 				AEB7463226374A7A00B4C056 /* StorageManager.swift in Sources */,
 				AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */,
@@ -413,6 +440,7 @@
 				AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
+				AEF1112D2638AAC8001D34E1 /* ProfileViewController.swift in Sources */,
 				AEB7460726373C6600B4C056 /* ChatViewControllerViewModel.swift in Sources */,
 				AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */,
 				AE88A88026333AF4003F35DF /* LoginView.swift in Sources */,

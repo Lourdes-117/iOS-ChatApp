@@ -113,7 +113,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
             let user = ChatAppUserModel(firstName: first,
                                         lastName: last,
                                         emailAddress: email)
-            DatabaseManager.shared.doesUserExist(with: user.safeEmail) { [weak self] (doesExist) in
+            DatabaseManager.shared.doesUserExist(with: DatabaseManager.getSafeEmail(from: user.emailAddress)) { [weak self] (doesExist) in
                 if doesExist {
                     self?.presentInvalidFormAlert(title: self?.viewModel.userExistsTitle, message: self?.viewModel.userExistsMessage)
                     DispatchQueue.main.async {
@@ -143,6 +143,9 @@ extension LoginViewController: LoginRegisterViewDelegate {
                                 //Sign in after all uploads are successful
                                 FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
                                     self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+                                    UserDefaults.standard.set(email, forKey: StringConstants.shared.userDefaults.email)
+                                    UserDefaults.standard.set(first, forKey: StringConstants.shared.userDefaults.firstName)
+                                    UserDefaults.standard.set(last, forKey: StringConstants.shared.userDefaults.lastName)
                                     DispatchQueue.main.async {
                                         self?.spinner.dismiss()
                                     }
@@ -181,11 +184,10 @@ extension LoginViewController: LoginRegisterViewDelegate {
         UIView.animate(withDuration: kAnimationDuration*5) { [weak self] in
             self?.view.alpha = 0
         } completion: { (_) in
-            let mainStoryBoard = UIStoryboard(name: HomeViewController.kIdentifier, bundle: nil)
-                let viewController = mainStoryBoard.instantiateViewController(withIdentifier: HomeViewController.kIdentifier)
+            let mainStoryBoard = UIStoryboard(name: HomeTabBarController.kIdentifier, bundle: nil)
+            let viewController = mainStoryBoard.instantiateViewController(withIdentifier: HomeTabBarController.kIdentifier)
             viewController.view.alpha = 0
-            let navController = UINavigationController(rootViewController: viewController)
-                window.rootViewController = navController
+            window.rootViewController = viewController
             UIView.animate(withDuration: kAnimationDuration*5) {
                 viewController.view.alpha = 1
             }

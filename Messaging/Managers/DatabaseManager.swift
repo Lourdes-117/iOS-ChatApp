@@ -29,7 +29,7 @@ extension DatabaseManager {
     
     ///Inserts New User To Database
     public func insertUser(with user: ChatAppUserModel, completion: @escaping (Bool)-> Void ) {
-        database.child(user.safeEmail).setValue([
+        database.child(DatabaseManager.getSafeEmail(from: user.emailAddress)).setValue([
                                                     StringConstants.shared.database.firstName: user.firstName,
                                                     StringConstants.shared.database.lastName: user.lastName]) { (error, databaseReference) in
             guard error == nil else {
@@ -39,5 +39,13 @@ extension DatabaseManager {
             }
             completion(true)
         }
+    }
+}
+
+extension DatabaseManager {
+    static func getSafeEmail(from emailAddress: String) -> String {
+        var email = emailAddress.replacingOccurrences(of: "@", with: "!")
+        email = emailAddress.replacingOccurrences(of: ".", with: "^")
+        return email
     }
 }

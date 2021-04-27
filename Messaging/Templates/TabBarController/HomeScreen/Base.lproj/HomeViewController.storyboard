@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Messaging" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,13 +31,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5Up-5e-aV9" secondAttribute="trailing" id="gSB-KF-2wF"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="tW2-A7-ibN"/>
+                    <navigationItem key="navigationItem" id="MGd-iB-rMP"/>
                     <connections>
                         <outlet property="tableView" destination="5Up-5e-aV9" id="kWW-9q-6F0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="124"/>
+            <point key="canvasLocation" x="119" y="-331"/>
         </scene>
     </scenes>
     <resources>

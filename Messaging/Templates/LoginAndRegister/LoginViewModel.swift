@@ -10,15 +10,9 @@ struct ChatAppUserModel {
     let firstName: String
     let lastName: String
     let emailAddress: String
-
-    var safeEmail: String {
-        var email = emailAddress.replacingOccurrences(of: "@", with: "!")
-        email = emailAddress.replacingOccurrences(of: ".", with: "^")
-        return email
-    }
     
     var profilePictureFileName: String {
-        return "\(safeEmail)_profile_picture.png"
+        return "\(DatabaseManager.getSafeEmail(from: emailAddress))_profile_picture.png"
     }
 }
 

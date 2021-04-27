@@ -12,6 +12,16 @@ class HomeConversationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
     
+    var cellTitle: String? {
+        set {
+            title.text = newValue
+        }
+        
+        get {
+            title.text
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,9 +31,4 @@ class HomeConversationTableViewCell: UITableViewCell {
     private func initialSetup() {
         self.accessoryType = .disclosureIndicator
     }
-
-    func setNameOfUser(_ name: String) {
-        title.text = name
-    }
-
 }

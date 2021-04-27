@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class NewConversationViewController: UIViewController {
     static let kIdentifier = "NewConversationViewController"
@@ -18,6 +19,7 @@ class NewConversationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        do { try FirebaseAuth.Auth.auth().signOut() } catch{  }
         initialSetup()
     }
     

@@ -22,15 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     fileprivate func configureInitialViewcontroller() {
-        var viewControllerIdentifier: String = HomeViewController.kIdentifier
+        var viewControllerIdentifier: String = HomeTabBarController.kIdentifier
         if FirebaseAuth.Auth.auth().currentUser == nil {
             viewControllerIdentifier = LoginViewController.kIdentifier
         }
         
         let mainStoryBoard = UIStoryboard(name: viewControllerIdentifier, bundle: nil)
-            let viewController = mainStoryBoard.instantiateViewController(withIdentifier: viewControllerIdentifier)
-        let navController = UINavigationController(rootViewController: viewController)
-            window?.rootViewController = navController
+        let viewController = mainStoryBoard.instantiateViewController(withIdentifier: viewControllerIdentifier)
+//        let navController = UINavigationController(rootViewController: viewController)
+            window?.rootViewController = viewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
