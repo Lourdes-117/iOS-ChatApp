@@ -9,4 +9,5 @@ import UIKit
 
 class ProfileViewControllerViewModel {
     let screenTitle = "Profile"
+    let signOut = "Sign Out"
 }

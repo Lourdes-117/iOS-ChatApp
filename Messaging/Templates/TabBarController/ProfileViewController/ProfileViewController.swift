@@ -21,13 +21,13 @@ class ProfileViewController: UIViewController {
     
     fileprivate func initialSetup() {
         self.title = viewModel.screenTitle
-        self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         registerCells()
         setupDataSourceAndDelegate()
     }
     
     fileprivate func registerCells() {
-        tableView.register(UINib(nibName: HomeConversationTableViewCell.kIdentifier, bundle: nil), forCellReuseIdentifier: HomeConversationTableViewCell.kIdentifier)
+        tableView.register(UINib(nibName: SignoutTableViewCell.kIdentifier, bundle: nil), forCellReuseIdentifier: SignoutTableViewCell.kIdentifier)
     }
     
     fileprivate func setupDataSourceAndDelegate() {
@@ -47,9 +47,9 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeConversationTableViewCell.kIdentifier) as? HomeConversationTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SignoutTableViewCell.kIdentifier) as? SignoutTableViewCell else { return UITableViewCell() }
         cell.accessoryType = .none
-        cell.cellTitle = "Sign Out"
+        cell.cellTitle = viewModel.signOut
         return cell
     }
 }
@@ -62,6 +62,8 @@ extension ProfileViewController: UITableViewDelegate {
             
             UIView.animate(withDuration: kAnimationDuration*5) { [weak self] in
                 self?.view.alpha = 0
+                self?.navigationController?.view.alpha = 0
+                self?.tabBarController?.view.alpha = 0
             } completion: { (_) in
                 guard let window = UIApplication.shared.windows.first else { return }
                 let mainStoryBoard = UIStoryboard(name: LoginViewController.kIdentifier, bundle: nil)

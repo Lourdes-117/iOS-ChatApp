@@ -41,6 +41,8 @@
 		AEF1112D2638AAC8001D34E1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */; };
 		AEF111302638AAD4001D34E1 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */; };
 		AEF111332638ADC9001D34E1 /* ProfileViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */; };
+		AEF1113C2638B3F6001D34E1 /* SignoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF1113B2638B3F6001D34E1 /* SignoutTableViewCell.swift */; };
+		AEF111402638B413001D34E1 /* SignoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEF1113F2638B413001D34E1 /* SignoutTableViewCell.xib */; };
 		AEFBA8A9263209170052D150 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8A8263209170052D150 /* LoginViewModel.swift */; };
 		AEFBA8AE2632146C0052D150 /* ViewControllerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */; };
 		AEFBA8B326321F080052D150 /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA8B226321F080052D150 /* StringUtility.swift */; };
@@ -85,6 +87,8 @@
 		AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerViewModel.swift; sourceTree = "<group>"; };
+		AEF1113B2638B3F6001D34E1 /* SignoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutTableViewCell.swift; sourceTree = "<group>"; };
+		AEF1113F2638B413001D34E1 /* SignoutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignoutTableViewCell.xib; sourceTree = "<group>"; };
 		AEFBA8A8263209170052D150 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtility.swift; sourceTree = "<group>"; };
 		AEFBA8B226321F080052D150 /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		AE88A87A26333A8A003F35DF /* Organisms */ = {
 			isa = PBXGroup;
 			children = (
+				AEF111362638B30D001D34E1 /* ProfilePageTableViewCells */,
 				AEB745F7263731B200B4C056 /* HomeConversationTableViewCell */,
 				AE88A88A2633415A003F35DF /* RegisterOrganism */,
 				AE88A87B26333A9D003F35DF /* LoginOrganism */,
@@ -284,11 +289,28 @@
 		AEF111232638A5C8001D34E1 /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */,
 				AEF1112C2638AAC8001D34E1 /* ProfileViewController.swift */,
 				AEF111322638ADC9001D34E1 /* ProfileViewControllerViewModel.swift */,
-				AEF1112F2638AAD4001D34E1 /* ProfileViewController.storyboard */,
 			);
 			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
+		AEF111362638B30D001D34E1 /* ProfilePageTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				AEF1113A2638B3E6001D34E1 /* SignOut */,
+			);
+			path = ProfilePageTableViewCells;
+			sourceTree = "<group>";
+		};
+		AEF1113A2638B3E6001D34E1 /* SignOut */ = {
+			isa = PBXGroup;
+			children = (
+				AEF1113B2638B3F6001D34E1 /* SignoutTableViewCell.swift */,
+				AEF1113F2638B413001D34E1 /* SignoutTableViewCell.xib */,
+			);
+			path = SignOut;
 			sourceTree = "<group>";
 		};
 		AEFBA8AC263214600052D150 /* Utilities */ = {
@@ -370,6 +392,7 @@
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
 				AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */,
 				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
+				AEF111402638B413001D34E1 /* SignoutTableViewCell.xib in Resources */,
 				AEF111262638A774001D34E1 /* HomeTabBarController.storyboard in Resources */,
 				AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */,
 			);
@@ -442,6 +465,7 @@
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
 				AEF1112D2638AAC8001D34E1 /* ProfileViewController.swift in Sources */,
 				AEB7460726373C6600B4C056 /* ChatViewControllerViewModel.swift in Sources */,
+				AEF1113C2638B3F6001D34E1 /* SignoutTableViewCell.swift in Sources */,
 				AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */,
 				AE88A88026333AF4003F35DF /* LoginView.swift in Sources */,
 				AEB7460426373AA900B4C056 /* HomeConversationTableViewCell.swift in Sources */,
