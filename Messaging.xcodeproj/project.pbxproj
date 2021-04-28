@@ -24,6 +24,7 @@
 		AE88A88C26334237003F35DF /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE88A88B26334237003F35DF /* RegisterView.xib */; };
 		AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88E2633436F003F35DF /* RegisterView.swift */; };
 		AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A89126334850003F35DF /* RegisterViewViewModel.swift */; };
+		AE91DC2E2639E187006BA2A1 /* ImageViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE91DC2D2639E187006BA2A1 /* ImageViewUtility.swift */; };
 		AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */; };
 		AEA2317D2638BDBB000BD274 /* ProfilePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */; };
 		AEA2317E2638BDBB000BD274 /* ProfilePictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */; };
@@ -73,6 +74,7 @@
 		AE88A88B26334237003F35DF /* RegisterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
 		AE88A88E2633436F003F35DF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AE88A89126334850003F35DF /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
+		AE91DC2D2639E187006BA2A1 /* ImageViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtility.swift; sourceTree = "<group>"; };
 		AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureTableViewCell.swift; sourceTree = "<group>"; };
 		AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePictureTableViewCell.xib; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				AEFBA8AD2632146C0052D150 /* ViewControllerUtility.swift */,
 				AEFBA8B226321F080052D150 /* StringUtility.swift */,
 				AE88A88326333BA2003F35DF /* ViewUtility.swift */,
+				AE91DC2D2639E187006BA2A1 /* ImageViewUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
 				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
 				AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */,
+				AE91DC2E2639E187006BA2A1 /* ImageViewUtility.swift in Sources */,
 				AEA2317D2638BDBB000BD274 /* ProfilePictureTableViewCell.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,

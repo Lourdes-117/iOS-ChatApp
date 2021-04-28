@@ -25,7 +25,12 @@ class ProfilePictureTableViewCell: UITableViewCell {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeImage))
         profilePicture.addGestureRecognizer(gesture)
         userName.text = viewModel.userName
-    }
+        profilePicture.loadImage(from: viewModel.profilePictureUrl)
+        profilePicture.bounds.size = viewModel.profilePicImageViewSize
+        profilePicture.setRoundedCorners()
+        profilePicture.layer.borderWidth = viewModel.borderWidth
+        profilePicture.layer.borderColor = viewModel.borderColor
+}
     
     @objc fileprivate func changeImage() {
         
