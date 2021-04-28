@@ -59,6 +59,16 @@ extension DatabaseManager {
             }
         }
     }
+    
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+        database.child(StringConstants.shared.database.users).observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            completion(.success(value))
+        }
+    }
 }
 
 extension DatabaseManager {
@@ -67,4 +77,8 @@ extension DatabaseManager {
         email = emailAddress.replacingOccurrences(of: ".", with: "^")
         return email
     }
+}
+
+public enum DatabaseError: Error {
+    case failedToFetch
 }

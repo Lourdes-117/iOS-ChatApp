@@ -13,6 +13,8 @@ class ProfilePictureTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
+    let viewModel = ProfilePictureTableViewCellViewModel()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,6 +24,7 @@ class ProfilePictureTableViewCell: UITableViewCell {
     fileprivate func initialSetup() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(changeImage))
         profilePicture.addGestureRecognizer(gesture)
+        userName.text = viewModel.userName
     }
     
     @objc fileprivate func changeImage() {
