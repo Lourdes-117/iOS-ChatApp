@@ -11,6 +11,10 @@ struct ChatAppUserModel {
     let lastName: String
     let emailAddress: String
     
+    var safeEmail: String {
+        DatabaseManager.getSafeEmail(from: emailAddress)
+    }
+    
     var profilePictureFileName: String {
         return "\(DatabaseManager.getSafeEmail(from: emailAddress))\(StringConstants.shared.storage.profilePicture)"
     }

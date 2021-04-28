@@ -28,6 +28,9 @@ class StringConstants {
 
 ///Use Through StringConstants shared Instance
 struct DatabaseConstants {
+    let users = "users"
+    let name = "name"
+    let safeEmail = "safe_email"
     let firstName = "first_name"
     let lastName = "last_name"
 }

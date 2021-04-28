@@ -16,15 +16,19 @@ class ProfilePictureTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        initialSetup()
+    }
+    
+    fileprivate func initialSetup() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(changeImage))
+        profilePicture.addGestureRecognizer(gesture)
+    }
+    
+    @objc fileprivate func changeImage() {
+        
     }
     
     func setupCell() {
-        layoutSubviews()
-        layoutIfNeeded()
-        self.profilePicture.setRoundedCorners()
-        profilePicture.setRoundedCorners()
-        profilePicture.layer.borderColor = UIColor.black.cgColor
-        layoutSubviews()
-        layoutIfNeeded()
+
     }
 }

@@ -33,11 +33,30 @@ extension DatabaseManager {
                                                     StringConstants.shared.database.firstName: user.firstName,
                                                     StringConstants.shared.database.lastName: user.lastName]) { (error, databaseReference) in
             guard error == nil else {
-                print("Failed To Write To Databae")
+                print("Failed To Write To Database")
                 completion(false)
                 return
             }
             completion(true)
+        }
+        
+        self.database.child(StringConstants.shared.database.users).observeSingleEvent(of: .value) { [weak self] snapShot in
+            if var userCollection = snapShot.value as? [[String: String]] {
+                let newElement: [String: String] = [
+                        StringConstants.shared.database.name: "\(user.firstName) \(user.lastName)",
+                        StringConstants.shared.database.safeEmail: user.safeEmail
+                    ]
+                userCollection.append(newElement)
+                self?.database.child(StringConstants.shared.database.users).setValue(userCollection)
+            } else {
+                let newCollection: [[String: String]] = [
+                    [
+                        StringConstants.shared.database.name: "\(user.firstName) \(user.lastName)",
+                        StringConstants.shared.database.safeEmail: user.safeEmail
+                    ]
+                ]
+                self?.database.child(StringConstants.shared.database.users).setValue(newCollection)
+            }
         }
     }
 }
