@@ -28,8 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let mainStoryBoard = UIStoryboard(name: viewControllerIdentifier, bundle: nil)
-        let viewController = mainStoryBoard.instantiateViewController(withIdentifier: viewControllerIdentifier)
-//        let navController = UINavigationController(rootViewController: viewController)
+        var viewController = mainStoryBoard.instantiateViewController(withIdentifier: viewControllerIdentifier)
+        
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            viewController = UINavigationController(rootViewController: viewController)
+        }
             window?.rootViewController = viewController
     }
 

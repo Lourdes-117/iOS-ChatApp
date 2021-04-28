@@ -10,7 +10,7 @@ import UIKit
 extension UIView {
     
     func setRoundedCorners() {
-        self.layer.cornerRadius = self.frame.width/2
+        self.layer.cornerRadius = self.frame.size.width/2
     }
     
     func commonInit(_ nibName: String) {

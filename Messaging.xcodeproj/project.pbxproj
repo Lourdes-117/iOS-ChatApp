@@ -25,6 +25,8 @@
 		AE88A88F2633436F003F35DF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88E2633436F003F35DF /* RegisterView.swift */; };
 		AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A89126334850003F35DF /* RegisterViewViewModel.swift */; };
 		AE9DCD8426361DB8003AFF71 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */; };
+		AEA2317D2638BDBB000BD274 /* ProfilePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */; };
+		AEA2317E2638BDBB000BD274 /* ProfilePictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */; };
 		AEB745FA263732A700B4C056 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB745F9263732A700B4C056 /* ChatViewController.swift */; };
 		AEB745FE263732C800B4C056 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB745FD263732C800B4C056 /* ChatViewController.storyboard */; };
 		AEB7460126373A8C00B4C056 /* HomeConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB7460026373A8C00B4C056 /* HomeConversationTableViewCell.xib */; };
@@ -71,6 +73,8 @@
 		AE88A88E2633436F003F35DF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		AE88A89126334850003F35DF /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		AE9DCD8326361DB8003AFF71 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureTableViewCell.swift; sourceTree = "<group>"; };
+		AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePictureTableViewCell.xib; sourceTree = "<group>"; };
 		AEB745F9263732A700B4C056 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		AEB745FD263732C800B4C056 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
 		AEB7460026373A8C00B4C056 /* HomeConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeConversationTableViewCell.xib; sourceTree = "<group>"; };
@@ -246,6 +250,15 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		AEA231782638BD66000BD274 /* ProfilePicture */ = {
+			isa = PBXGroup;
+			children = (
+				AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */,
+				AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */,
+			);
+			path = ProfilePicture;
+			sourceTree = "<group>";
+		};
 		AEB745F7263731B200B4C056 /* HomeConversationTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +312,7 @@
 		AEF111362638B30D001D34E1 /* ProfilePageTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				AEA231782638BD66000BD274 /* ProfilePicture */,
 				AEF1113A2638B3E6001D34E1 /* SignOut */,
 			);
 			path = ProfilePageTableViewCells;
@@ -382,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA2317E2638BDBB000BD274 /* ProfilePictureTableViewCell.xib in Resources */,
 				AE4FA9802631F3E5006A3243 /* LaunchScreen.storyboard in Resources */,
 				AEB746132637433300B4C056 /* NewConversationViewController.storyboard in Resources */,
 				AEF111302638AAD4001D34E1 /* ProfileViewController.storyboard in Resources */,
@@ -461,6 +476,7 @@
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
 				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
 				AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */,
+				AEA2317D2638BDBB000BD274 /* ProfilePictureTableViewCell.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
 				AEF1112D2638AAC8001D34E1 /* ProfileViewController.swift in Sources */,

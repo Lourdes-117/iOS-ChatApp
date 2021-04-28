@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController {
     }
     
     fileprivate func registerCells() {
+        tableView.register(UINib(nibName: ProfilePictureTableViewCell.kIdentifier, bundle: nil), forCellReuseIdentifier: ProfilePictureTableViewCell.kIdentifier)
         tableView.register(UINib(nibName: SignoutTableViewCell.kIdentifier, bundle: nil), forCellReuseIdentifier: SignoutTableViewCell.kIdentifier)
     }
     
@@ -39,43 +40,62 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        ProfileViewCells.none.rawValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SignoutTableViewCell.kIdentifier) as? SignoutTableViewCell else { return UITableViewCell() }
-        cell.accessoryType = .none
-        cell.cellTitle = viewModel.signOut
-        return cell
+        let cellType = ProfileViewCells(rawValue: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellType?.getCellIdentifier() ?? "")
+        switch cellType {
+        case .SignOut:
+            guard let cell = cell as? SignoutTableViewCell else { return UITableViewCell() }
+            cell.cellTitle = viewModel.signOut
+            return cell
+            
+        case .ProfilePic:
+            guard let cell = cell as? ProfilePictureTableViewCell else { return UITableViewCell() }
+            cell.setupCell()
+            return cell
+        default:
+            debugPrint("All Cells Populated")
+        }
+        return cell ?? UITableViewCell()
     }
 }
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-            
-            
-            UIView.animate(withDuration: kAnimationDuration*5) { [weak self] in
-                self?.view.alpha = 0
-                self?.navigationController?.view.alpha = 0
-                self?.tabBarController?.view.alpha = 0
-            } completion: { (_) in
-                guard let window = UIApplication.shared.windows.first else { return }
-                let mainStoryBoard = UIStoryboard(name: LoginViewController.kIdentifier, bundle: nil)
-                let viewController = mainStoryBoard.instantiateViewController(withIdentifier: LoginViewController.kIdentifier)
-                viewController.view.alpha = 0
-                window.rootViewController = viewController
-                UIView.animate(withDuration: kAnimationDuration*5) {
-                    viewController.view.alpha = 1
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch ProfileViewCells(rawValue: indexPath.row) {
+        case .SignOut:
+            do {
+                try FirebaseAuth.Auth.auth().signOut()
+                
+                
+                UIView.animate(withDuration: kAnimationDuration*5) { [weak self] in
+                    self?.view.alpha = 0
+                    self?.navigationController?.view.alpha = 0
+                    self?.tabBarController?.view.alpha = 0
+                } completion: { (_) in
+                    guard let window = UIApplication.shared.windows.first else { return }
+                    let mainStoryBoard = UIStoryboard(name: LoginViewController.kIdentifier, bundle: nil)
+                    let viewController = mainStoryBoard.instantiateViewController(withIdentifier: LoginViewController.kIdentifier)
+                    let navController =  UINavigationController(rootViewController: viewController)
+                    viewController.view.alpha = 0
+                    window.rootViewController = navController
+                    UIView.animate(withDuration: kAnimationDuration*5) {
+                        viewController.view.alpha = 1
+                    }
                 }
+            } catch {
+                debugPrint("Error Signing Out")
             }
-        } catch {
-            debugPrint("Error Signing Out")
+        default:
+            debugPrint("Cell Tapped")
         }
     }
 }
