@@ -7,13 +7,16 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
     static let kIdentifier = "ChatViewController"
     
+    let viewModel = ChatViewControllerViewModel()
+    
     private var messages = [Message]()
     
-    //Mark :- Mock Data
+    //MARK:- Mock Data
     private let selfSender = Sender(senderId: "1", displayName: "Me", photoUrl: "")
     private let otherSender = Sender(senderId: "2", displayName: "Friend", photoUrl: "")
     private func getDummyMessages() -> [Message] {
@@ -30,6 +33,18 @@ class ChatViewController: MessagesViewController {
         initialSetup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        messageInputBar.inputTextView.becomeFirstResponder()
+    }
+    
+    func setUser(name: String, email: String, isNewConversation: Bool) {
+        title = name
+        viewModel.userName = name
+        viewModel.userEmail = email
+        viewModel.isNewConversation = isNewConversation
+    }
+    
     fileprivate func initialSetup() {
         setupDataSourceDelegate()
     }
@@ -38,6 +53,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
     }
 }
 
@@ -63,4 +79,16 @@ extension ChatViewController: MessagesLayoutDelegate {
 
 extension ChatViewController: MessagesDisplayDelegate {
     
+}
+
+
+extension ChatViewController: InputBarAccessoryViewDelegate {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        guard !text.replacingOccurrences(of: " ", with: "").isEmpty else { return }
+        if viewModel.isNewConversation {
+            //Create Convo in DB
+        } else {
+            //Append Convo In DB
+        }
+    }
 }

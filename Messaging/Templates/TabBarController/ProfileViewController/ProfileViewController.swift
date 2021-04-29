@@ -91,8 +91,8 @@ extension ProfileViewController: UITableViewDelegate {
                     self?.tabBarController?.view.alpha = 0
                 } completion: { (_) in
                     guard let window = UIApplication.shared.windows.first else { return }
-                    let mainStoryBoard = UIStoryboard(name: LoginViewController.kIdentifier, bundle: nil)
-                    let viewController = mainStoryBoard.instantiateViewController(withIdentifier: LoginViewController.kIdentifier)
+                    
+                    guard let viewController = LoginViewController.initiateVC() else { return }
                     let navController =  UINavigationController(rootViewController: viewController)
                     viewController.view.alpha = 0
                     window.rootViewController = navController

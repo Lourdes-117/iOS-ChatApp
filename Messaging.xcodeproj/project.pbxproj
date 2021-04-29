@@ -277,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				AEB745FD263732C800B4C056 /* ChatViewController.storyboard */,
-				AEB745F9263732A700B4C056 /* ChatViewController.swift */,
 				AEB7460626373C6600B4C056 /* ChatViewControllerViewModel.swift */,
+				AEB745F9263732A700B4C056 /* ChatViewController.swift */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";

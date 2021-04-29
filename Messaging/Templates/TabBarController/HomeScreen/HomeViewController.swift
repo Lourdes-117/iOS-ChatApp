@@ -8,6 +8,10 @@
 import UIKit
 import FirebaseAuth
 
+protocol NewConversationDelegate: NSObjectProtocol {
+    func startNewConversationWith(name: String, email: String)
+}
+
 class HomeViewController: UIViewController {
     static let kIdentifier = "HomeViewController"
     
@@ -30,7 +34,7 @@ class HomeViewController: UIViewController {
     }
     
     private func addNewConversationButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapNewConversationButton))
     }
     
     private func registerCells() {
@@ -43,11 +47,19 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
     }
     
-    @objc private func didTapComposeButton() {
-        let chatStoryboard = UIStoryboard(name: NewConversationViewController.kIdentifier, bundle: nil)
-        let chatViewController = chatStoryboard.instantiateViewController(withIdentifier: NewConversationViewController.kIdentifier)
+    @objc private func didTapNewConversationButton() {
+        guard let chatViewController = NewConversationViewController.initiateVC() else { return }
+        chatViewController.delegate = self
         let navController = UINavigationController(rootViewController: chatViewController)
         present(navController, animated: true, completion: nil)
+    }
+    
+    fileprivate func openChatWithUser(name: String, email: String) {
+        guard let chatViewController = ChatViewController.initiateVC() else { return }
+        
+        chatViewController.setUser(name: name, email: email, isNewConversation: true)
+        chatViewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(chatViewController, animated: true)
     }
 }
 
@@ -77,12 +89,12 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let chatStoryboard = UIStoryboard(name: ChatViewController.kIdentifier, bundle: nil)
-        let chatViewController = chatStoryboard.instantiateViewController(withIdentifier: ChatViewController.kIdentifier)
-    
-        chatViewController.title = "Some User"
-        chatViewController.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(chatViewController, animated: true)
+        openChatWithUser(name: "Some User", email: "email@gmaill.com")
+    }
+}
+
+extension HomeViewController: NewConversationDelegate {
+    func startNewConversationWith(name: String, email: String) {
+        openChatWithUser(name: name, email: email)
     }
 }

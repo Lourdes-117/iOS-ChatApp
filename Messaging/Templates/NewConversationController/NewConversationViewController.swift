@@ -19,6 +19,8 @@ class NewConversationViewController: UIViewController {
     private var searchResults = [[String: String]]()
     private var hasFetched = false
     
+    weak var delegate: NewConversationDelegate?
+    
     let viewModel = NewConversationViewModel()
     
     override func viewDidLoad() {
@@ -111,5 +113,10 @@ extension NewConversationViewController: UITableViewDataSource {
 extension NewConversationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let name = searchResults[indexPath.row][StringConstants.shared.database.name],
+              let email = searchResults[indexPath.row][StringConstants.shared.database.safeEmail] else { return }
+        dismiss(animated: true) { [ weak self] in
+            self?.delegate?.startNewConversationWith(name: name, email: email)
+        }
     }
 }

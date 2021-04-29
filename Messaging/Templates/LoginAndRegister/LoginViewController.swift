@@ -185,8 +185,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
             self?.view.alpha = 0
             self?.navigationController?.view.alpha = 0
         } completion: { (_) in
-            let mainStoryBoard = UIStoryboard(name: HomeTabBarController.kIdentifier, bundle: nil)
-            let viewController = mainStoryBoard.instantiateViewController(withIdentifier: HomeTabBarController.kIdentifier)
+            guard let viewController = HomeTabBarController.initiateVC() else { return }
             viewController.view.alpha = 0
             viewController.navigationController?.view.alpha = 0
             window.rootViewController = viewController

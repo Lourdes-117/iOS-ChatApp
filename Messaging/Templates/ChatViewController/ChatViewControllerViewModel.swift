@@ -22,5 +22,7 @@ struct Sender: SenderType {
 }
 
 class ChatViewControllerViewModel {
-    
+    var isNewConversation = true
+    var userName: String = ""
+    var userEmail: String = ""
 }
