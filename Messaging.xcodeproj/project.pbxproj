@@ -257,8 +257,8 @@
 		AEA231782638BD66000BD274 /* ProfilePicture */ = {
 			isa = PBXGroup;
 			children = (
-				AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */,
 				AEA2317C2638BDBB000BD274 /* ProfilePictureTableViewCell.xib */,
+				AEA2317B2638BDBB000BD274 /* ProfilePictureTableViewCell.swift */,
 				AEEB51F02639574500F63FED /* ProfilePictureTableViewCellViewModel.swift */,
 			);
 			path = ProfilePicture;

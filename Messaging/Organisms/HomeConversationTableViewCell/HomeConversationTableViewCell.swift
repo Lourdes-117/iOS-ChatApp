@@ -11,6 +11,7 @@ class HomeConversationTableViewCell: UITableViewCell {
     static let kIdentifier = "HomeConversationTableViewCell"
     
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var profilePictureView: UIImageView!
     
     var cellTitle: String? {
         set {
@@ -29,6 +30,6 @@ class HomeConversationTableViewCell: UITableViewCell {
     }
     
     private func initialSetup() {
-        self.accessoryType = .disclosureIndicator
+        profilePictureView.setRoundedCorners()
     }
 }
