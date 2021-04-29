@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import MessageKit
 import InputBarAccessoryView
 
@@ -17,11 +18,10 @@ class ChatViewController: MessagesViewController {
     private var messages = [Message]()
     
     //MARK:- Mock Data
-    private let selfSender = Sender(senderId: "1", displayName: "Me", photoUrl: "")
     private let otherSender = Sender(senderId: "2", displayName: "Friend", photoUrl: "")
     private func getDummyMessages() -> [Message] {
         var messagesArray = [Message]()
-        messagesArray.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hi, This is a message I sent")))
+        messagesArray.append(Message(sender: otherSender, messageId: "1", sentDate: Date(), kind: .text("Hi, This is a message I sent")))
         messagesArray.append(Message(sender: otherSender, messageId: "2", sentDate: Date(), kind: .text("This is a message sent by my friend")))
         return messagesArray
     }
@@ -40,8 +40,8 @@ class ChatViewController: MessagesViewController {
     
     func setUser(name: String, email: String, isNewConversation: Bool) {
         title = name
-        viewModel.userName = name
-        viewModel.userEmail = email
+        viewModel.receiverName = name
+        viewModel.receiverEmail = email
         viewModel.isNewConversation = isNewConversation
     }
     
@@ -59,6 +59,10 @@ class ChatViewController: MessagesViewController {
 
 extension ChatViewController: MessagesDataSource {
     func currentSender() -> SenderType {
+        guard let selfSender = viewModel.selfSender else {
+            signOutUserAndForceCloseApp()
+            return Sender(senderId: "", displayName: "", photoUrl: "")
+        }
         return selfSender
     }
     
@@ -69,8 +73,6 @@ extension ChatViewController: MessagesDataSource {
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
-    
-    
 }
 
 extension ChatViewController: MessagesLayoutDelegate {
@@ -84,9 +86,22 @@ extension ChatViewController: MessagesDisplayDelegate {
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        guard !text.replacingOccurrences(of: " ", with: "").isEmpty else { return }
+        guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
+              let messageId = viewModel.generateMessageID(),
+              let selfSender = viewModel.selfSender else {
+            signOutUserAndForceCloseApp()
+            return
+        }
         if viewModel.isNewConversation {
             //Create Convo in DB
+            let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
+            DatabaseManager.shared.createNewConversation(with: viewModel.receiverEmail, messageToSend: message) { success in
+                if success {
+                    debugPrint("Message Sent")
+                } else {
+                    debugPrint("Failed To Send")
+                }
+            }
         } else {
             //Append Convo In DB
         }

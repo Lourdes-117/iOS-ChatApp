@@ -33,6 +33,13 @@ struct DatabaseConstants {
     let safeEmail = "safe_email"
     let firstName = "first_name"
     let lastName = "last_name"
+    let conversations = "conversations"
+    let messageId = "messageId"
+    let otherUserEmail = "other_user_email"
+    let latestMessage = "latest_message"
+    let date = "date"
+    let message = "message"
+    let isRead = "isRead"
 }
 
 ///Use Through StringConstants shared Instance

@@ -23,6 +23,24 @@ struct Sender: SenderType {
 
 class ChatViewControllerViewModel {
     var isNewConversation = true
-    var userName: String = ""
-    var userEmail: String = ""
+    var receiverName: String = ""
+    var receiverEmail: String = ""
+    let senderEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email)
+    
+    var selfSender: Sender? {
+        guard let email = senderEmail as? String else { return nil }
+        let profilePicurl = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.profilePicurl) as? String ?? ""
+        let firstName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.firstName) as? String
+        let lastName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.lastName)  as? String
+        let fullName = (firstName ?? "") + (lastName ?? "")
+        return Sender(senderId: email, displayName: fullName, photoUrl: profilePicurl)
+    }
+    
+    func generateMessageID() -> String? {
+        let dateString = Date().timeIntervalSince1970.description.replacingOccurrences(of: ".", with: "")
+        guard let senderEmail = senderEmail else { return nil }
+        let messageId = "conversation_\(receiverEmail)_\(dateString)_\(senderEmail)".replacingOccurrences(of: " ", with: "")
+        debugPrint("Generated Message ID: \(messageId)")
+        return messageId
+    }
 }

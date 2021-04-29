@@ -101,6 +101,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
             spinner.show(in: view)
             FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authDataResult, error) in
                 self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
+                UserDefaults.standard.set(DatabaseManager.getSafeEmail(from:email), forKey: StringConstants.shared.userDefaults.email)
                 DispatchQueue.main.async {
                     self?.spinner.dismiss()
                 }

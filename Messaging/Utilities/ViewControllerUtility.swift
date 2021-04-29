@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+
+func signOutUserAndForceCloseApp() {
+    do {
+        try FirebaseAuth.Auth.auth().signOut()
+    } catch { }
+    fatalError("User Cache Does Not Exist")
+}
 
 extension UIViewController {
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
