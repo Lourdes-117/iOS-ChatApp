@@ -17,7 +17,7 @@ final class DatabaseManager {
 // MARK:- Sending Messages
 extension DatabaseManager {
     /// Creates A New Conversation With Target User
-    public func createNewConversation(with otherUserEmail: String, messageToSend: Message, completion: @escaping (Bool) -> Void) {
+    public func createNewConversation(with otherUserEmail: String, messageToSend: Message, otherUserName: String, completion: @escaping (Bool) -> Void) {
         guard let currentEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String else {
             signOutUserAndForceCloseApp()
             return
@@ -32,7 +32,7 @@ extension DatabaseManager {
             if var conversations = userNode[StringConstants.shared.database.conversations] as? [[String: Any]] {
                 //Conversation Array Exists
                 //Appending Messages
-                guard let messageNode = self?.createConversationNode(messageToSend, otherUserEmail) else {
+                guard let messageNode = self?.createConversationNode(messageToSend, otherUserEmail, otherUserName) else {
                     completion(false)
                     return
                 }
@@ -51,15 +51,15 @@ extension DatabaseManager {
                 //Conversation Array Does Not Exist
                 //Creare Array
                 userNode[StringConstants.shared.database.conversations] = [
-                    self?.createConversationNode(messageToSend, otherUserEmail)
+                    self?.createConversationNode(messageToSend, otherUserEmail, otherUserName)
                 ]
-                reference.setValue(userNode) { error, _ in
+                reference.setValue(userNode) { [weak self] error, _ in
                     guard error == nil else {
                         debugPrint("Error In Writing Message To Database")
                         completion(false)
                         return
                     }
-                    completion(true)
+                    self?.finishCreatingConversation(message: messageToSend, currentUserEmail: currentEmail, otherUserName: otherUserName, completion: completion)
                 }
             }
         }
@@ -83,14 +83,30 @@ extension DatabaseManager {
     
     
     // Creaet A messae Node
-    private func createConversationNode(_ message: Message, _ otherUserEmail: String) -> [String: Any] {
+    private func createConversationNode(_ message: Message, _ otherUserEmail: String, _ otherUserName: String) -> [String: Any] {
         let messageDate = message.sentDate.getDateString()
         
-        var messageToSend = ""
+        let messageString = getMessageString(message)
+        
+        let newConversationData: [String: Any] = [
+            StringConstants.shared.database.messageId : message.messageId,
+            StringConstants.shared.database.otherUserEmail : otherUserEmail,
+            StringConstants.shared.database.otherUserName: otherUserName,
+            StringConstants.shared.database.latestMessage : [
+                StringConstants.shared.database.date : messageDate,
+                StringConstants.shared.database.message : messageString,
+                StringConstants.shared.database.isRead : false,
+            ]
+        ]
+        return newConversationData
+    }
+    
+    private func getMessageString(_ message: Message) -> String {
+        var messageString = ""
         switch message.kind {
         
         case .text(let messageText):
-            messageToSend = messageText
+            messageString = messageText
         case .attributedText(_):
             break
         case .photo(_):
@@ -110,16 +126,33 @@ extension DatabaseManager {
         case .custom(_):
             break
         }
-        let newConversationData: [String: Any] = [
-            StringConstants.shared.database.messageId : message.messageId,
-            StringConstants.shared.database.otherUserEmail : otherUserEmail,
-            StringConstants.shared.database.latestMessage : [
-                StringConstants.shared.database.date : messageDate,
-                StringConstants.shared.database.message : messageToSend,
-                StringConstants.shared.database.isRead : false,
+        return messageString
+    }
+    
+    private func finishCreatingConversation(message: Message, currentUserEmail: String, otherUserName: String, completion: @escaping (Bool) -> Void) {
+        let messageDict: [String: Any] = [
+            StringConstants.shared.database.messageId: message.messageId,
+            StringConstants.shared.database.messageType: message.kind.rawValue,
+            StringConstants.shared.database.content: getMessageString(message),
+            StringConstants.shared.database.otherUserName: otherUserName,
+            StringConstants.shared.database.senderEmail: currentUserEmail,
+            StringConstants.shared.database.date: message.sentDate.getDateString(),
+            StringConstants.shared.database.isRead: false
+        ]
+        
+        let value: [String: Any] = [
+            StringConstants.shared.database.messagesArray: [
+                messageDict
             ]
         ]
-        return newConversationData
+        
+        database.child(message.messageId).setValue(value) { error, _ in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
 }
 
