@@ -86,7 +86,7 @@ extension DatabaseManager {
                     return nil
                 }
                 
-                let sender = Sender(senderId: otherUserEmail, displayName: otherUserName, photoUrl: "")
+                let sender = Sender(senderId: otherUserEmail, displayName: otherUserName, photoUrl: getProfilePicPathFromEmail(email: otherUserEmail))
                 
                 return Message(sender: sender,
                                messageId: messageId,
@@ -190,7 +190,7 @@ extension DatabaseManager {
                         completion(false)
                         return
                     }
-                    self?.finishCreatingConversation(message: messageToSend, currentUserEmail: currentUserName, otherUserName: otherUserEmail, completion: completion)
+                    self?.finishCreatingConversation(message: messageToSend, currentUserEmail: otherUserEmail, otherUserName: currentUserName, completion: completion)
                 }
             }
         }
