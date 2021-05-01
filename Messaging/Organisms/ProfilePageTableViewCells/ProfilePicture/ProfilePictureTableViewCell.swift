@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfilePictureTableViewCell: UITableViewCell {
     static let kIdentifier = "ProfilePictureTableViewCell"
@@ -30,6 +31,19 @@ class ProfilePictureTableViewCell: UITableViewCell {
         profilePicture.setRoundedCorners()
         profilePicture.layer.borderWidth = viewModel.borderWidth
         profilePicture.layer.borderColor = viewModel.borderColor
+        guard let email = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String else {
+            signOutUserAndForceCloseApp()
+            return
+        }
+        let profilePicPath = getProfilePicPathFromEmail(email: email)
+        StorageManager.shared.downloadUrl(for: profilePicPath) { [weak self] result in
+            switch result {
+            case .success(let url):
+                self?.profilePicture.sd_setImage(with: url, completed: nil)
+            case .failure(let error):
+                debugPrint("Error Getting Profile Pic Url \(error)")
+            }
+        }
 }
     
     @objc fileprivate func changeImage() {

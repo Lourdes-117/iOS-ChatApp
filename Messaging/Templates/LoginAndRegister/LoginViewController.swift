@@ -144,7 +144,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
                                 //Sign in after all uploads are successful
                                 FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
                                     self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
-                                    UserDefaults.standard.setValue(email, forKey: StringConstants.shared.userDefaults.email)
+                                    UserDefaults.standard.setValue(DatabaseManager.getSafeEmail(from:email), forKey: StringConstants.shared.userDefaults.email)
                                     UserDefaults.standard.setValue(first, forKey: StringConstants.shared.userDefaults.firstName)
                                     UserDefaults.standard.setValue(last, forKey: StringConstants.shared.userDefaults.lastName)
                                     DispatchQueue.main.async {

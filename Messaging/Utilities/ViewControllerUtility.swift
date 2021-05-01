@@ -15,6 +15,10 @@ func signOutUserAndForceCloseApp() {
     fatalError("User Cache Does Not Exist")
 }
 
+func getProfilePicPathFromEmail(email: String) -> String {
+    return "\(StringConstants.shared.storage.imagesPath)/\(email)\(StringConstants.shared.storage.profilePicture)"
+}
+
 extension UIViewController {
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

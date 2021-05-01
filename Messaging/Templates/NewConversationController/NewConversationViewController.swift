@@ -105,7 +105,12 @@ extension NewConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeConversationTableViewCell.kIdentifier) as? HomeConversationTableViewCell else { return UITableViewCell() }
         
-        cell.cellTitle = searchResults[indexPath.row][StringConstants.shared.database.name]
+        let userName = searchResults[indexPath.row][StringConstants.shared.database.name]
+        guard let email = searchResults[indexPath.row][StringConstants.shared.database.safeEmail] else {
+            signOutUserAndForceCloseApp()
+            return UITableViewCell()
+        }
+        cell.setupCell(userName: userName, latestMessage: nil, email: email)
         return cell
     }
 }

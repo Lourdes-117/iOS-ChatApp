@@ -19,6 +19,8 @@ class HomeViewController: UIViewController {
     
     let viewModel = HomeScreenViewModel()
     
+    var conversations: [Conversation] = [Conversation]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,6 +33,7 @@ class HomeViewController: UIViewController {
         addNewConversationButton()
         registerCells()
         setupDataSourceDelegate()
+        startListeningForConversations()
     }
     
     private func addNewConversationButton() {
@@ -54,10 +57,29 @@ class HomeViewController: UIViewController {
         present(navController, animated: true, completion: nil)
     }
     
-    fileprivate func openChatWithUser(name: String, email: String) {
+    fileprivate func startListeningForConversations() {
+        guard let email = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String else {
+            signOutUserAndForceCloseApp()
+            return
+        }
+        DatabaseManager.shared.getAllConversations(for: email) { [weak self] result in
+            switch result {
+            case .success(let conversations):
+                guard !conversations.isEmpty else { return }
+                self?.conversations = conversations
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                debugPrint("Failed To Get Convos \(error)")
+            }
+        }
+    }
+    
+    fileprivate func openChatWithUser(name: String, email: String, conversationID: String?) {
         guard let chatViewController = ChatViewController.initiateVC() else { return }
         
-        chatViewController.setUser(name: name, email: email, isNewConversation: true)
+        chatViewController.setupConversation(name: name, email: email, isNewConversation: true, conversationID: conversationID)
         chatViewController.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(chatViewController, animated: true)
     }
@@ -65,12 +87,15 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return conversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeConversationTableViewCell.kIdentifier) as? HomeConversationTableViewCell else { return UITableViewCell() }
-        cell.cellTitle = "Some User"
+        let name = conversations[indexPath.row].name
+        let message = conversations[indexPath.row].latestMessage.text
+        let email = conversations[indexPath.row].otherUserEmail
+        cell.setupCell(userName: name, latestMessage: message, email: email)
         return cell
     }
     
@@ -89,12 +114,15 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        openChatWithUser(name: "Some User", email: "email@gmaill.com")
+        let name = conversations[indexPath.row].name
+        let email = conversations[indexPath.row].otherUserEmail
+        let conversationID = conversations[indexPath.row].id
+        openChatWithUser(name: name, email: email, conversationID: conversationID)
     }
 }
 
 extension HomeViewController: NewConversationDelegate {
     func startNewConversationWith(name: String, email: String) {
-        openChatWithUser(name: name, email: email)
+        openChatWithUser(name: name, email: email, conversationID: nil)
     }
 }

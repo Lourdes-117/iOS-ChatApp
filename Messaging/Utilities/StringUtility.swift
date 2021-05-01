@@ -26,4 +26,12 @@ extension String {
         }
         return false
     }
+    
+    func getDateObject() -> Date? {
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .long
+        dateFormatter.timeZone = .current
+        let dateObject = dateFormatter.date(from: self)
+        return dateObject
+    }
 }

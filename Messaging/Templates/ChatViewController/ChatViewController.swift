@@ -29,7 +29,6 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        messages.append(contentsOf: getDummyMessages())
         initialSetup()
     }
     
@@ -38,15 +37,35 @@ class ChatViewController: MessagesViewController {
         messageInputBar.inputTextView.becomeFirstResponder()
     }
     
-    func setUser(name: String, email: String, isNewConversation: Bool) {
+    func setupConversation(name: String, email: String, isNewConversation: Bool, conversationID: String?) {
         title = name
         viewModel.receiverName = name
         viewModel.receiverEmail = email
         viewModel.isNewConversation = isNewConversation
+        viewModel.conversationID = conversationID
+        listenForMessage()
     }
     
     fileprivate func initialSetup() {
         setupDataSourceDelegate()
+    }
+    
+    fileprivate func listenForMessage() {
+        guard let conversationID = viewModel.conversationID else { return }
+        DatabaseManager.shared.getAllMessagesForConversation(with: conversationID) { [weak self] result in
+            switch result {
+            case .success(let messages):
+                guard !messages.isEmpty else {
+                    return
+                }
+                self?.messages = messages
+                DispatchQueue.main.async { [weak self] in
+                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                }
+            case .failure(let error):
+            debugPrint("Failed To Fetch messages \(error)")
+            }
+        }
     }
     
     fileprivate func setupDataSourceDelegate() {

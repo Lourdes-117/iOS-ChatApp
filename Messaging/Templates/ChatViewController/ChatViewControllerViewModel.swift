@@ -52,6 +52,7 @@ class ChatViewControllerViewModel {
     var isNewConversation = true
     var receiverName: String = ""
     var receiverEmail: String = ""
+    var conversationID: String?
     let senderEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email)
     
     var selfSender: Sender? {
