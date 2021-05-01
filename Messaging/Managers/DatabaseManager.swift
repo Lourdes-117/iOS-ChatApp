@@ -94,9 +94,80 @@ extension DatabaseManager {
         }
     }
     
+    fileprivate func updateLatestMessageForUser(emailOfUser: String, conversationID: String, message: Message, completion: @escaping (Bool) -> Void) {
+        //Update Sender Latest Message
+        self.database.child("\(emailOfUser)/\(StringConstants.shared.database.conversations)").observeSingleEvent(of: .value, with: { [weak self] snapshot in
+            guard var senderConversations = snapshot.value as? [[String: Any]] else {
+                completion(false)
+                return
+            }
+            
+            var position = 0
+            var targetConversation: [String: Any]?
+            
+            for conversationIterating in senderConversations {
+                if let currentConversationID = conversationIterating[StringConstants.shared.database.messageId] as? String,
+                   currentConversationID == conversationID {
+                    targetConversation = conversationIterating
+                    break
+                }
+                position += 1
+            }
+            
+            let updatedValue: [String: Any] = [
+                StringConstants.shared.database.date: message.sentDate.getDateString(),
+                StringConstants.shared.database.isRead: false,
+                StringConstants.shared.database.message: self?.getMessageString(message) ?? "",
+            ]
+            
+            targetConversation?[StringConstants.shared.database.latestMessage] = updatedValue
+            guard let targetConversation = targetConversation else {
+                completion(false)
+                return
+            }
+            senderConversations[position] = targetConversation
+            self?.database.child("\(emailOfUser)/\(StringConstants.shared.database.conversations)").setValue( senderConversations, withCompletionBlock: { error, _ in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                completion(true)
+            })
+        })
+    }
+    
     /// Send A Message To Target Conversation
-    public func sendMessage(to conversation: String, message: Message, completion: @escaping (Bool) -> Void) {
-        
+    public func sendMessage(to conversationID: String, senderEmail: String, senderName: String, message: Message, receiverEmailId: String, completion: @escaping (Bool) -> Void) {
+        //Add New Message To Conversation
+        database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").observeSingleEvent(of: .value) { [weak self] snapshot in
+            guard var currentMessages = snapshot.value as? [[String: Any]] else {
+                completion(false)
+                return
+            }
+            
+            let collectionMessage: [String: Any] = [
+                StringConstants.shared.database.messageId: message.messageId,
+                StringConstants.shared.database.messageType: message.kind.rawValue,
+                StringConstants.shared.database.content: self?.getMessageString(message) ?? "",
+                StringConstants.shared.database.otherUserName: senderName,
+                StringConstants.shared.database.senderEmail: senderEmail,
+                StringConstants.shared.database.date: message.sentDate.getDateString(),
+                StringConstants.shared.database.isRead: false
+            ]
+            
+            currentMessages.append(collectionMessage)
+            self?.database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").setValue(currentMessages, withCompletionBlock: { error, _ in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                //Update Sender Latest Message
+                self?.updateLatestMessageForUser(emailOfUser: senderEmail, conversationID: conversationID, message: message, completion: completion)
+                
+                //Update Recepient Latest Message
+                self?.updateLatestMessageForUser(emailOfUser: receiverEmailId, conversationID: conversationID, message: message, completion: completion)
+            })
+        }
     }
     
     
@@ -273,6 +344,20 @@ extension DatabaseManager {
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child(StringConstants.shared.database.users).observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            completion(.success(value))
+        }
+    }
+}
+
+// MARK: - Get Any Data
+extension DatabaseManager {
+    /// Get Data For Path
+    public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
+        self.database.child(path).observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }

@@ -79,7 +79,7 @@ class HomeViewController: UIViewController {
     fileprivate func openChatWithUser(name: String, email: String, conversationID: String?) {
         guard let chatViewController = ChatViewController.initiateVC() else { return }
         
-        chatViewController.setupConversation(name: name, email: email, isNewConversation: true, conversationID: conversationID)
+        chatViewController.setupConversation(name: name, email: email, conversationID: conversationID)
         chatViewController.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(chatViewController, animated: true)
     }

@@ -49,16 +49,19 @@ struct Sender: SenderType {
 }
 
 class ChatViewControllerViewModel {
-    var isNewConversation = true
     var receiverName: String = ""
     var receiverEmail: String = ""
     var conversationID: String?
-    let senderEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email)
+    var isNewConversation: Bool {
+        return conversationID == nil
+    }
+    let senderEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String
+    let senderName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
     
     var selfSender: Sender? {
-        guard let email = senderEmail as? String else { return nil }
+        guard let email = senderEmail else { return nil }
         let profilePicurl = getProfilePicPathFromEmail(email: email)
-        let fullName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
+        let fullName = senderName
         return Sender(senderId: email, displayName: fullName, photoUrl: profilePicurl)
     }
     

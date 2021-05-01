@@ -9,22 +9,15 @@ import UIKit
 import FirebaseAuth
 import MessageKit
 import InputBarAccessoryView
+import JGProgressHUD
 
 class ChatViewController: MessagesViewController {
     static let kIdentifier = "ChatViewController"
+    private let spinner = JGProgressHUD(style: .dark)
     
     let viewModel = ChatViewControllerViewModel()
     
     private var messages = [Message]()
-    
-    //MARK:- Mock Data
-    private let otherSender = Sender(senderId: "2", displayName: "Friend", photoUrl: "")
-    private func getDummyMessages() -> [Message] {
-        var messagesArray = [Message]()
-        messagesArray.append(Message(sender: otherSender, messageId: "1", sentDate: Date(), kind: .text("Hi, This is a message I sent")))
-        messagesArray.append(Message(sender: otherSender, messageId: "2", sentDate: Date(), kind: .text("This is a message sent by my friend")))
-        return messagesArray
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +30,10 @@ class ChatViewController: MessagesViewController {
         messageInputBar.inputTextView.becomeFirstResponder()
     }
     
-    func setupConversation(name: String, email: String, isNewConversation: Bool, conversationID: String?) {
+    func setupConversation(name: String, email: String, conversationID: String?) {
         title = name
         viewModel.receiverName = name
         viewModel.receiverEmail = email
-        viewModel.isNewConversation = isNewConversation
         viewModel.conversationID = conversationID
         listenForMessage()
     }
@@ -52,18 +44,25 @@ class ChatViewController: MessagesViewController {
     
     fileprivate func listenForMessage() {
         guard let conversationID = viewModel.conversationID else { return }
+        spinner.show(in: view)
         DatabaseManager.shared.getAllMessagesForConversation(with: conversationID) { [weak self] result in
+            self?.spinner.dismiss()
             switch result {
             case .success(let messages):
                 guard !messages.isEmpty else {
                     return
                 }
-                self?.messages = messages
                 DispatchQueue.main.async { [weak self] in
-                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    if self?.messages.isEmpty ?? true {
+                        self?.messages = messages
+                        self?.messagesCollectionView.reloadData()
+                    } else {
+                        self?.messages = messages
+                        self?.messagesCollectionView.reloadDataAndKeepOffset()
+                    }
                 }
             case .failure(let error):
-            debugPrint("Failed To Fetch messages \(error)")
+                debugPrint("Failed To Fetch messages \(error)")
             }
         }
     }
@@ -111,11 +110,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             signOutUserAndForceCloseApp()
             return
         }
+        let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
         if viewModel.isNewConversation {
             //Create Convo in DB
-            let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-            DatabaseManager.shared.createNewConversation(with: viewModel.receiverEmail, messageToSend : message, otherUserName: viewModel.receiverName) { success in
+            self.messageInputBar.inputTextView.text = ""
+            DatabaseManager.shared.createNewConversation(with: viewModel.receiverEmail, messageToSend : message, otherUserName: viewModel.receiverName) { [weak self] success in
                 if success {
+                    self?.messagesCollectionView.reloadData()
+                    self?.viewModel.conversationID = messageId
+                    self?.listenForMessage()
                     debugPrint("Message Sent")
                 } else {
                     debugPrint("Failed To Send")
@@ -123,6 +126,17 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             }
         } else {
             //Append Convo In DB
+            guard let conversationID = viewModel.conversationID else {
+                return
+            }
+            self.messageInputBar.inputTextView.text = ""
+            DatabaseManager.shared.sendMessage(to: conversationID, senderEmail: viewModel.senderEmail ?? "", senderName: viewModel.senderName, message: message, receiverEmailId: viewModel.receiverEmail) { success in
+                if success {
+                    debugPrint("Message Sent")
+                } else {
+                    debugPrint("Failed To Send")
+                }
+            }
         }
     }
 }
