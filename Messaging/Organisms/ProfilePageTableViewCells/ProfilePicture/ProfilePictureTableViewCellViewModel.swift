@@ -11,9 +11,7 @@ class ProfilePictureTableViewCellViewModel {
     let borderWidth: CGFloat = 2
     let borderColor = UIColor.lightGray.cgColor
     var userName: String {
-        let firstName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.firstName) as? String
-        let lastName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.lastName) as? String
-        return "\(firstName ?? "") \(lastName ?? "")"
+        return UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
     }
     
     var profilePictureUrl: String? {

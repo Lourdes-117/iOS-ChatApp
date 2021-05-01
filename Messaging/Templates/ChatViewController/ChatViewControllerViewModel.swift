@@ -58,9 +58,7 @@ class ChatViewControllerViewModel {
     var selfSender: Sender? {
         guard let email = senderEmail as? String else { return nil }
         let profilePicurl = getProfilePicPathFromEmail(email: email)
-        let firstName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.firstName) as? String
-        let lastName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.lastName)  as? String
-        let fullName = currentUserName
+        let fullName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
         return Sender(senderId: email, displayName: fullName, photoUrl: profilePicurl)
     }
     

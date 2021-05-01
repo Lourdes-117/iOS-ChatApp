@@ -13,10 +13,6 @@ final class DatabaseManager {
     
     private let database = Database.database().reference()
 }
-
-// MARK:- Stub
-let currentUserName = "Current User Name"
-
 // MARK:- Sending Messages
 extension DatabaseManager {
     
@@ -29,6 +25,7 @@ extension DatabaseManager {
         
         createNewConversationForUser(currentEmail, messageToSend, otherUserEmail, otherUserName) { [weak self] success in
             if success {
+                let currentUserName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
                 self?.createNewConversationForUser(otherUserEmail, messageToSend, currentEmail, currentUserName) {
                     success in
                     completion(success)
@@ -190,6 +187,7 @@ extension DatabaseManager {
                         completion(false)
                         return
                     }
+                    let currentUserName = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.name) as? String ?? ""
                     self?.finishCreatingConversation(message: messageToSend, currentUserEmail: otherUserEmail, otherUserName: currentUserName, completion: completion)
                 }
             }
@@ -226,13 +224,15 @@ extension DatabaseManager {
 // MARK: - Accounts Management
 extension DatabaseManager {
     /// Check If User With Email Exists
-    public func doesUserExist(with email: String, completion: @escaping ((Bool) -> Void)) {
-        database.child(email).observeSingleEvent(of: .value) { (snapShot) in
-            guard snapShot.value as? String != nil else {
-                completion(false)
+    public func doesUserExist(with email: String, completionWithUsername: @escaping ((String?) -> Void)) {
+        database.child(StringConstants.shared.database.users).observeSingleEvent(of: .value) { (snapShot) in
+            guard let value = snapShot.value as? [[String: String]] else {
+                completionWithUsername(nil)
                 return
             }
-            completion(true)
+            let userToSearch = value.filter({$0[StringConstants.shared.database.safeEmail] == email})
+            let userName = userToSearch.first?[StringConstants.shared.database.name]
+            completionWithUsername(userName)
         }
     }
     

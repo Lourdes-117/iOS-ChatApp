@@ -54,8 +54,7 @@ struct DatabaseConstants {
 struct UserDefaultConstants {
     let profilePicurl = "profile_picture_url"
     let email = "email_address"
-    let firstName = "first_name"
-    let lastName = "last_name"
+    let name = "first_name"
 }
 
 ///Use Through StringConstants shared Instance

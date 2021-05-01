@@ -101,7 +101,17 @@ extension LoginViewController: LoginRegisterViewDelegate {
             spinner.show(in: view)
             FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authDataResult, error) in
                 self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
-                UserDefaults.standard.set(DatabaseManager.getSafeEmail(from:email), forKey: StringConstants.shared.userDefaults.email)
+                let safeEmail = DatabaseManager.getSafeEmail(from:email)
+                DatabaseManager.shared.doesUserExist(with: safeEmail, completionWithUsername: { userName in
+                    guard let userName = userName else {
+                        do {
+                            try FirebaseAuth.Auth.auth().signOut()
+                        } catch { }
+                        fatalError()
+                    }
+                    UserDefaults.standard.setValue(userName, forKey: StringConstants.shared.userDefaults.name)
+                })
+                UserDefaults.standard.set(safeEmail, forKey: StringConstants.shared.userDefaults.email)
                 DispatchQueue.main.async {
                     self?.spinner.dismiss()
                 }
@@ -114,8 +124,8 @@ extension LoginViewController: LoginRegisterViewDelegate {
             let user = ChatAppUserModel(firstName: first,
                                         lastName: last,
                                         emailAddress: email)
-            DatabaseManager.shared.doesUserExist(with: DatabaseManager.getSafeEmail(from: user.emailAddress)) { [weak self] (doesExist) in
-                if doesExist {
+            DatabaseManager.shared.doesUserExist(with: DatabaseManager.getSafeEmail(from: user.emailAddress)) { [weak self] (userName) in
+                if userName != nil {
                     self?.presentInvalidFormAlert(title: self?.viewModel.userExistsTitle, message: self?.viewModel.userExistsMessage)
                     DispatchQueue.main.async {
                         self?.spinner.dismiss()
@@ -145,8 +155,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
                                 FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
                                     self?.didSignInSuccessfully(authDataResult: authDataResult, error: error)
                                     UserDefaults.standard.setValue(DatabaseManager.getSafeEmail(from:email), forKey: StringConstants.shared.userDefaults.email)
-                                    UserDefaults.standard.setValue(first, forKey: StringConstants.shared.userDefaults.firstName)
-                                    UserDefaults.standard.setValue(last, forKey: StringConstants.shared.userDefaults.lastName)
+                                    UserDefaults.standard.setValue(first + last, forKey: StringConstants.shared.userDefaults.name)
                                     DispatchQueue.main.async {
                                         self?.spinner.dismiss()
                                     }
