@@ -32,7 +32,7 @@ class ImageZoomView: UIScrollView, UIScrollViewDelegate {
         // Creates the image view and adds it as a subview to the scroll view
         imageView = UIImageView(image: imageToUse)
         imageView.frame = frame
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
         
         setupScrollView(image: imageToUse)

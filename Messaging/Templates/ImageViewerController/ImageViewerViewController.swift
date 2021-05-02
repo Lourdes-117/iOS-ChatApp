@@ -8,7 +8,8 @@
 import UIKit
 
 class ImageViewerViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var backgroundView: UIView!
     
     var imageUrl: URL?
     
@@ -20,20 +21,12 @@ class ImageViewerViewController: UIViewController {
     }
     
     private func initialSetup() {
-        imageView.sd_setImage(with: imageUrl) { [weak self] image, _, _, _ in
-            if let image = image, let strongSelf = self {
-                    let ratio = image.size.width / image.size.height
-                if strongSelf.view.frame.width > strongSelf.view.frame.height {
-                    let newHeight = strongSelf.view.frame.width / ratio
-                    strongSelf.imageView.frame.size = CGSize(width: strongSelf.view.frame.width, height: newHeight)
-                    }
-                    else{
-                        let newWidth = strongSelf.view.frame.height * ratio
-                        strongSelf.imageView.frame.size = CGSize(width: strongSelf.view.frame.width, height: 1000)
-                    }
-            }
+        UIImageView().sd_setImage(with: imageUrl) { [weak self] image, _, _, _ in
+            let imageView = ImageZoomView(frame: self?.backgroundView.frame ?? CGRect(), image: image)
+            imageView.layer.borderColor = UIColor.black.cgColor
+            imageView.layer.borderWidth = 5
+            self?.backgroundView.addSubview(imageView)
         }
-        imageView.enablePinchToZoom()
     }
     
     @IBAction func onTapCloseButton(_ sender: Any) {
