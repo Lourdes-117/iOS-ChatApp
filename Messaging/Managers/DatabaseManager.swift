@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseDatabase
+import MessageKit
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -85,10 +86,22 @@ extension DatabaseManager {
                 
                 let sender = Sender(senderId: otherUserEmail, displayName: otherUserName, photoUrl: getProfilePicPathFromEmail(email: otherUserEmail))
                 
+                var messageKind: MessageKind?
+                if messageType == StringConstants.shared.messageKind.text {
+                    messageKind = .text(content)
+                } else if messageType == StringConstants.shared.messageKind.photo {
+                    guard let imageUrl = URL(string: content) else { return nil }
+                    messageKind = .photo(Media(url: imageUrl, image: nil, placeholderImage: UIImage(named: "image_placeholder") ?? UIImage(), size: CGSize(width: 300, height: 300)))
+                }
+                
+                guard let messageKind = messageKind else {
+                    return Message(sender: sender, messageId: messageId, sentDate: date, kind: .text("Error Loading Message"))
+                }
+                
                 return Message(sender: sender,
                                messageId: messageId,
                                sentDate: date,
-                               kind: .text(content))
+                               kind: messageKind)
             }
             completion(.success(messages))
         }
@@ -137,7 +150,7 @@ extension DatabaseManager {
     }
     
     /// Send A Message To Target Conversation
-    public func sendMessage(to conversationID: String, senderEmail: String, senderName: String, message: Message, receiverEmailId: String, completion: @escaping (Bool) -> Void) {
+    public func sendMessage(conversationID: String, senderEmail: String, senderName: String, message: Message, receiverEmailId: String, completion: @escaping (Bool) -> Void) {
         //Add New Message To Conversation
         database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").observeSingleEvent(of: .value) { [weak self] snapshot in
             guard var currentMessages = snapshot.value as? [[String: Any]] else {
@@ -200,8 +213,10 @@ extension DatabaseManager {
             messageString = messageText
         case .attributedText(_):
             break
-        case .photo(_):
-            break
+        case .photo(let mediaItem):
+            if let urlString = mediaItem.url?.absoluteString {
+                messageString = urlString
+            }
         case .video(_):
             break
         case .location(_):

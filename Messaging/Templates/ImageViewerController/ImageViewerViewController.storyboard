@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Viewer View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ImageViewerViewController" customModule="Messaging" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7en-Zm-4wx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oje-Gj-snn">
+                                        <rect key="frame" x="10" y="343" width="394" height="210"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="oje-Gj-snn" secondAttribute="height" multiplier="15:8" id="0l3-l6-Wcm"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPN-zj-L33">
+                                        <rect key="frame" x="25" y="25.5" width="35" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="llp-mw-h7G"/>
+                                            <constraint firstAttribute="width" secondItem="hPN-zj-L33" secondAttribute="height" multiplier="1:1" id="tM1-CZ-z28"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="x.circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="onTapCloseButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3yT-5R-FGe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="oje-Gj-snn" firstAttribute="centerX" secondItem="7en-Zm-4wx" secondAttribute="centerX" id="BBa-ih-xrV"/>
+                                    <constraint firstItem="hPN-zj-L33" firstAttribute="top" secondItem="7en-Zm-4wx" secondAttribute="top" constant="25" id="VoU-qc-N3o"/>
+                                    <constraint firstAttribute="trailing" secondItem="oje-Gj-snn" secondAttribute="trailing" constant="10" id="eUo-4L-E44"/>
+                                    <constraint firstItem="hPN-zj-L33" firstAttribute="leading" secondItem="7en-Zm-4wx" secondAttribute="leading" constant="25" id="ljA-Tn-S9v"/>
+                                    <constraint firstItem="oje-Gj-snn" firstAttribute="centerY" secondItem="7en-Zm-4wx" secondAttribute="centerY" id="xOM-U6-IIR"/>
+                                    <constraint firstItem="oje-Gj-snn" firstAttribute="leading" secondItem="7en-Zm-4wx" secondAttribute="leading" constant="10" id="zaJ-UD-GQb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7en-Zm-4wx" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9xh-P5-DDV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7en-Zm-4wx" secondAttribute="trailing" id="Bdn-Qc-m2H"/>
+                            <constraint firstItem="7en-Zm-4wx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gn2-Xp-3oK"/>
+                            <constraint firstAttribute="bottom" secondItem="7en-Zm-4wx" secondAttribute="bottom" id="p7U-57-Lgr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="oje-Gj-snn" id="6gf-qQ-N96"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="97.767857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+    </resources>
+</document>

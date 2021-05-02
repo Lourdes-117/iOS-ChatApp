@@ -15,7 +15,7 @@ extension UIImageView {
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let data = data, error == nil,
                 let image = UIImage(data: data)
-                else { return }
+            else { return }
             DispatchQueue.main.async() { [weak self] in
                 self?.image = image
             }
@@ -25,5 +25,19 @@ extension UIImageView {
     func loadImage(from url: String?, contentMode mode: ContentMode = .scaleAspectFit) {
         guard let urlString = url, let urlObject = URL(string: urlString) else { return }
         loadImage(from: urlObject, contentMode: mode)
+    }
+    
+    func enablePinchToZoom() {
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(pinchGesture)
+    }
+    
+    @objc
+    private func startZooming(_ sender: UIPinchGestureRecognizer) {
+        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
+        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
+        sender.view?.transform = scale
+        sender.scale = 1
     }
 }

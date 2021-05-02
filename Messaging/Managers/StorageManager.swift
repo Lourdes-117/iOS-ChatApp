@@ -15,10 +15,34 @@ class StorageManager {
     
     public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
     
-    ///Uploads Picture to firebase storage and returns Url of Image
+    /// Uploads Picture to firebase storage and returns Url of Image
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
-        let filePath = "\(StringConstants.shared.storage.imagesPath)\(fileName)"
-        storage.child(filePath).putData(data, metadata: nil) { [weak self] (metaData, error) in
+        let filePath = "\(StringConstants.shared.storage.profilePicturesPath)\(fileName)"
+        uploadImageAtPath(filePath: filePath, imageData: data, completion: completion)
+    }
+    
+    /// Uploads Photo In A Conversation
+    public func uploadMessagePhoto(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
+        let filePath = "\(StringConstants.shared.storage.messageImagesPath)\(fileName)"
+        uploadImageAtPath(filePath: filePath, imageData: data, completion: completion)
+    }
+    
+    /// Get Download URL for a file
+    public func downloadUrl(for path: String, completion: @escaping (Result<URL, Error>) -> Void) {
+        let reference = storage.child(path)
+        
+        reference.downloadURL { url, error in
+            guard let url = url, error == nil else {
+                completion(.failure(StorageErrors.failedToDownload))
+                return
+            }
+            completion(.success(url))
+        }
+    }
+    
+    /// Upload Image At Given Location
+    fileprivate func uploadImageAtPath(filePath: String, imageData: Data, completion: @escaping UploadPictureCompletion) {
+        storage.child(filePath).putData(imageData, metadata: nil) { [weak self] (metaData, error) in
             guard error == nil else {
                 //failed
                 completion(.failure(StorageErrors.failedToUpload))
@@ -35,18 +59,6 @@ class StorageManager {
                 debugPrint("download Url returned \(urlString)")
                 completion(.success(urlString))
             }
-        }
-    }
-    
-    public func downloadUrl(for path: String, completion: @escaping (Result<URL, Error>) -> Void) {
-        let reference = storage.child(path)
-        
-        reference.downloadURL { url, error in
-            guard let url = url, error == nil else {
-                completion(.failure(StorageErrors.failedToDownload))
-                return
-            }
-            completion(.success(url))
         }
     }
     

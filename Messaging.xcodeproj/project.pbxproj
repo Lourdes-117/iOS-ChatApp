@@ -17,6 +17,10 @@
 		AE4FA9912631F637006A3243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4FA9902631F637006A3243 /* LoginViewController.swift */; };
 		AE4FA9952631F675006A3243 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4FA9942631F675006A3243 /* LoginViewController.storyboard */; };
 		AE712E702632074000F09978 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE712E6F2632074000F09978 /* StringConstants.swift */; };
+		AE72FAE0263EE3C600E5306D /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE72FADF263EE3C600E5306D /* UIImageExtensions.swift */; };
+		AE72FAE3263F0C3600E5306D /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE72FAE2263F0C3600E5306D /* ImageViewerViewController.swift */; };
+		AE72FAE5263F0C5300E5306D /* ImageViewerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE72FAE4263F0C5300E5306D /* ImageViewerViewController.storyboard */; };
+		AE72FAE7263F184300E5306D /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE72FAE6263F184300E5306D /* ImageZoomView.swift */; };
 		AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE88A87C26333AAF003F35DF /* LoginView.xib */; };
 		AE88A88026333AF4003F35DF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A87F26333AF4003F35DF /* LoginView.swift */; };
 		AE88A88426333BA2003F35DF /* ViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE88A88326333BA2003F35DF /* ViewUtility.swift */; };
@@ -68,6 +72,10 @@
 		AE4FA9902631F637006A3243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE4FA9942631F675006A3243 /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		AE712E6F2632074000F09978 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		AE72FADF263EE3C600E5306D /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		AE72FAE2263F0C3600E5306D /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
+		AE72FAE4263F0C5300E5306D /* ImageViewerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageViewerViewController.storyboard; sourceTree = "<group>"; };
+		AE72FAE6263F184300E5306D /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
 		AE88A87C26333AAF003F35DF /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		AE88A87F26333AF4003F35DF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AE88A88326333BA2003F35DF /* ViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtility.swift; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 				AEF111212638A58F001D34E1 /* TabBarController */,
 				AEB745F82637327100B4C056 /* ChatViewController */,
 				AEB7460D263742F500B4C056 /* NewConversationController */,
+				AE72FAE1263F0BF000E5306D /* ImageViewerController */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -214,6 +223,15 @@
 				AE4FA9942631F675006A3243 /* LoginViewController.storyboard */,
 			);
 			path = LoginAndRegister;
+			sourceTree = "<group>";
+		};
+		AE72FAE1263F0BF000E5306D /* ImageViewerController */ = {
+			isa = PBXGroup;
+			children = (
+				AE72FAE4263F0C5300E5306D /* ImageViewerViewController.storyboard */,
+				AE72FAE2263F0C3600E5306D /* ImageViewerViewController.swift */,
+			);
+			path = ImageViewerController;
 			sourceTree = "<group>";
 		};
 		AE88A87A26333A8A003F35DF /* Organisms */ = {
@@ -342,6 +360,8 @@
 				AE88A88326333BA2003F35DF /* ViewUtility.swift */,
 				AE91DC2D2639E187006BA2A1 /* ImageViewUtility.swift */,
 				AEC096DB263B640500E4E3D5 /* DateUtility.swift */,
+				AE72FADF263EE3C600E5306D /* UIImageExtensions.swift */,
+				AE72FAE6263F184300E5306D /* ImageZoomView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -415,6 +435,7 @@
 				AE88A87D26333AAF003F35DF /* LoginView.xib in Resources */,
 				AE4FA97D2631F3E5006A3243 /* Assets.xcassets in Resources */,
 				AEF1111F2638A1AF001D34E1 /* GoogleService-Info.plist in Resources */,
+				AE72FAE5263F0C5300E5306D /* ImageViewerViewController.storyboard in Resources */,
 				AE4FA97B2631F3E3006A3243 /* HomeViewController.storyboard in Resources */,
 				AEF111402638B413001D34E1 /* SignoutTableViewCell.xib in Resources */,
 				AEF111262638A774001D34E1 /* HomeTabBarController.storyboard in Resources */,
@@ -486,7 +507,9 @@
 				AE88A88726333D29003F35DF /* LoginViewViewModel.swift in Sources */,
 				AE88A89226334850003F35DF /* RegisterViewViewModel.swift in Sources */,
 				AEB7460F2637432500B4C056 /* NewConversationViewController.swift in Sources */,
+				AE72FAE3263F0C3600E5306D /* ImageViewerViewController.swift in Sources */,
 				AE91DC2E2639E187006BA2A1 /* ImageViewUtility.swift in Sources */,
+				AE72FAE7263F184300E5306D /* ImageZoomView.swift in Sources */,
 				AEA2317D2638BDBB000BD274 /* ProfilePictureTableViewCell.swift in Sources */,
 				AE4FA9742631F3E3006A3243 /* AppDelegate.swift in Sources */,
 				AE712E702632074000F09978 /* StringConstants.swift in Sources */,
@@ -498,6 +521,7 @@
 				AE88A88026333AF4003F35DF /* LoginView.swift in Sources */,
 				AEB7460426373AA900B4C056 /* HomeConversationTableViewCell.swift in Sources */,
 				AEB745FA263732A700B4C056 /* ChatViewController.swift in Sources */,
+				AE72FAE0263EE3C600E5306D /* UIImageExtensions.swift in Sources */,
 				AEB7460A2637421600B4C056 /* HomeScreenViewModel.swift in Sources */,
 				AE4FA9762631F3E3006A3243 /* SceneDelegate.swift in Sources */,
 			);

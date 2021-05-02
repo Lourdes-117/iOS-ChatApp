@@ -22,6 +22,7 @@ class StringConstants {
     //Constants
     let userDefaults = UserDefaultConstants()
     let database = DatabaseConstants()
+    let messageKind = MessageKindConstant()
     let regex = Regex()
     let storage = StorageConstants()
 }
@@ -58,9 +59,25 @@ struct UserDefaultConstants {
 }
 
 ///Use Through StringConstants shared Instance
+struct MessageKindConstant {
+    let text = "text"
+    let attributedText = "attributedText"
+    let photo = "photo"
+    let video = "video"
+    let location = "location"
+    let emoji = "emoji"
+    let audio = "audio"
+    let contact = "contact"
+    let linkPreview = "linkPreview"
+    let custom = "custom"
+}
+
+///Use Through StringConstants shared Instance
 struct StorageConstants {
-    let imagesPath = "images/"
+    let profilePicturesPath = "profile_pictures/"
     let profilePicture = "_profile_picture.png"
+    let messageImagesPath = "message_images/"
+    let messageImageExtension = "_image.jpg"
 }
 
 ///Use Through StringConstants shared Instance

@@ -19,25 +19,25 @@ extension MessageKind {
     var rawValue: String {
         switch self {
         case .text(_):
-            return "text"
+            return StringConstants.shared.messageKind.text
         case .attributedText(_):
-            return "attributed_text"
+            return StringConstants.shared.messageKind.attributedText
         case .photo(_):
-            return "photo"
+            return StringConstants.shared.messageKind.photo
         case .video(_):
-            return "video"
+            return StringConstants.shared.messageKind.video
         case .location(_):
-            return "location"
+            return StringConstants.shared.messageKind.location
         case .emoji(_):
-            return "emoji"
+            return StringConstants.shared.messageKind.emoji
         case .audio(_):
-            return "audio"
+            return StringConstants.shared.messageKind.audio
         case .contact(_):
-            return "contact"
+            return StringConstants.shared.messageKind.contact
         case .linkPreview(_):
-            return "link_preview"
+            return StringConstants.shared.messageKind.linkPreview
         case .custom(_):
-            return "custom"
+            return StringConstants.shared.messageKind.custom
         }
     }
 }
@@ -48,7 +48,41 @@ struct Sender: SenderType {
     var photoUrl: String
 }
 
+struct Media: MediaItem {
+    var url: URL?
+    
+    var image: UIImage?
+    
+    var placeholderImage: UIImage
+    
+    var size: CGSize
+    
+    
+}
+
 class ChatViewControllerViewModel {
+    // Input View
+    let inputBarButtonIcon = UIImage(systemName: "plus")
+    let attachMediaTitle = "Attach Media"
+    let attachMediaMessage = "What Would You Like To Attach"
+    let photo = "Photo"
+    let video = "Video"
+    let audio = "Audio"
+    let cancel = "Cancel"
+    
+    // Attaching Media
+    let attachPhotoTitle = "Attach Photo"
+    let attachPhotoMessage = "Where Would You Like To Attach Photo From"
+    let camera = "Camera"
+    let photoLibrary = "Photo Library"
+    
+    // Segue Identifiers
+    let imageViewerSegueIdentifier = "ImageViewerViewControllerSegue"
+    
+    // Selected Message
+    var selectedImageUrl: URL?
+    
+    // Accounts
     var receiverName: String = ""
     var receiverEmail: String = ""
     var conversationID: String?

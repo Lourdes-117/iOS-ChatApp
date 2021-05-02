@@ -16,7 +16,7 @@ func signOutUserAndForceCloseApp() {
 }
 
 func getProfilePicPathFromEmail(email: String) -> String {
-    return "\(StringConstants.shared.storage.imagesPath)/\(email)\(StringConstants.shared.storage.profilePicture)"
+    return "\(StringConstants.shared.storage.profilePicturesPath)/\(email)\(StringConstants.shared.storage.profilePicture)"
 }
 
 extension UIViewController {
