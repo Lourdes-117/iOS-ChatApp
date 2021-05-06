@@ -278,7 +278,7 @@ extension ChatViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         // Upload Image
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
            let imageData = image.jpeg(.low) {
             guard let messageID = viewModel.generateMessageID(),
                   let conversationID = viewModel.conversationID,
@@ -325,9 +325,9 @@ extension ChatViewController: UIImagePickerControllerDelegate {
                     //Sending Message
                     DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: senderEmail, senderName: strongSelf.viewModel.senderName, message: message, receiverEmailId: strongSelf.viewModel.receiverEmail) { success in
                         if success {
-                            debugPrint("Image Message Sent")
+                            debugPrint("Video Message Sent")
                         } else {
-                            debugPrint("Image Message Sending Failure")
+                            debugPrint("Video Message Sending Failure")
                         }
                     }
                 case .failure(let error):
