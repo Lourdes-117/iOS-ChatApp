@@ -92,6 +92,9 @@ extension DatabaseManager {
                 } else if messageType == StringConstants.shared.messageKind.photo {
                     guard let imageUrl = URL(string: content) else { return nil }
                     messageKind = .photo(Media(url: imageUrl, image: nil, placeholderImage: UIImage(named: "image_placeholder") ?? UIImage(), size: CGSize(width: 300, height: 300)))
+                } else if messageType == StringConstants.shared.messageKind.video {
+                    guard let videoUrl = URL(string: content) else { return nil }
+                    messageKind = .video(Media(url: videoUrl, image: nil, placeholderImage: UIImage(named: "video_placeholder") ?? UIImage(), size: CGSize(width: 300, height: 300)))
                 }
                 
                 guard let messageKind = messageKind else {
@@ -217,8 +220,10 @@ extension DatabaseManager {
             if let urlString = mediaItem.url?.absoluteString {
                 messageString = urlString
             }
-        case .video(_):
-            break
+        case .video(let mediaItem):
+            if let urlString = mediaItem.url?.absoluteString {
+                messageString = urlString
+            }
         case .location(_):
             break
         case .emoji(_):

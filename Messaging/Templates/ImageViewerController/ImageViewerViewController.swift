@@ -25,7 +25,7 @@ class ImageViewerViewController: UIViewController {
             let imageView = ImageZoomView(frame: self?.backgroundView.frame ?? CGRect(), image: image)
             imageView.layer.borderColor = UIColor.black.cgColor
             imageView.layer.borderWidth = 5
-            self?.backgroundView.addSubview(imageView)
+            self?.backgroundView.insertSubview(imageView, at: 0)
         }
     }
     

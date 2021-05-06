@@ -75,12 +75,17 @@ class ChatViewControllerViewModel {
     let attachPhotoMessage = "Where Would You Like To Attach Photo From"
     let camera = "Camera"
     let photoLibrary = "Photo Library"
+    let attachVideoTitle = "Attach Video"
+    let attachVideoMessage = "Where Would You Like To Attach Video From"
+    let mediaTypeForVideo = "public.movie"
+    let videoQualityType: UIImagePickerController.QualityType = .typeMedium
     
     // Segue Identifiers
     let imageViewerSegueIdentifier = "ImageViewerViewControllerSegue"
     
     // Selected Message
     var selectedImageUrl: URL?
+    var selectedVideoUrl: URL?
     
     // Accounts
     var receiverName: String = ""

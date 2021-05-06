@@ -27,6 +27,12 @@ class StorageManager {
         uploadImageAtPath(filePath: filePath, imageData: data, completion: completion)
     }
     
+    /// Upload Video Or File With URL
+    public func uploadMessageVideo(with url: URL, fileName: String, completion: @escaping UploadPictureCompletion) {
+        let filePath = "\(StringConstants.shared.storage.messageVideosPath)\(fileName)"
+        uploadVideoWithURL(filePath: filePath, fileURL: url, completion: completion)
+    }
+    
     /// Get Download URL for a file
     public func downloadUrl(for path: String, completion: @escaping (Result<URL, Error>) -> Void) {
         let reference = storage.child(path)
@@ -59,6 +65,28 @@ class StorageManager {
                 debugPrint("download Url returned \(urlString)")
                 completion(.success(urlString))
             }
+        }
+    }
+    
+    fileprivate func uploadVideoWithURL(filePath: String, fileURL: URL, completion: @escaping UploadPictureCompletion) {
+        
+        storage.child(filePath).putFile(from: fileURL, metadata: nil) { [weak self] _, error in
+            guard error == nil else {
+                //failed
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            
+            self?.storage.child(filePath).downloadURL(completion: { url, error in
+                guard let url = url else {
+                    debugPrint("Failed To Download Image")
+                    completion(.failure(StorageErrors.failedToDownload))
+                    return
+                }
+                let urlString = url.absoluteString
+                debugPrint("download Url returned \(urlString)")
+                completion(.success(urlString))
+            })
         }
     }
     

@@ -77,7 +77,9 @@ struct StorageConstants {
     let profilePicturesPath = "profile_pictures/"
     let profilePicture = "_profile_picture.png"
     let messageImagesPath = "message_images/"
+    let messageVideosPath = "message_videos/"
     let messageImageExtension = "_image.jpg"
+    let messageVideoExtension = "_video.mov"
 }
 
 ///Use Through StringConstants shared Instance

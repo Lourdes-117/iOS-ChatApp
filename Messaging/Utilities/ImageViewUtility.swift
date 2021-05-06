@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension UIImageView {
     func loadImage(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
