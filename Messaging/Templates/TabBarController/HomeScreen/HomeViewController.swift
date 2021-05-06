@@ -123,6 +123,7 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: NewConversationDelegate {
     func startNewConversationWith(name: String, email: String) {
-        openChatWithUser(name: name, email: email, conversationID: nil)
+        let conversationWithSelectedUser = (conversations.filter({ $0.otherUserEmail == email }).first)?.id
+        openChatWithUser(name: name, email: email, conversationID: conversationWithSelectedUser)
     }
 }

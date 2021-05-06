@@ -107,7 +107,7 @@ extension LoginViewController: LoginRegisterViewDelegate {
                         do {
                             try FirebaseAuth.Auth.auth().signOut()
                         } catch { }
-                        fatalError()
+                        return
                     }
                     UserDefaults.standard.setValue(userName, forKey: StringConstants.shared.userDefaults.name)
                 })

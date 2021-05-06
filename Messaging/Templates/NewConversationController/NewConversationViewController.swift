@@ -68,6 +68,9 @@ class NewConversationViewController: UIViewController {
         guard hasFetched else { return }
         self.spinner.dismiss()
         let results: [[String: String]] = self.users.filter({
+            guard let email = $0[StringConstants.shared.database.safeEmail],
+                  let currentUserEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String,
+                  email != currentUserEmail else { return false }
             guard let name = $0[StringConstants.shared.database.name]?.lowercased() else { return false }
             return name.hasPrefix(term)
         })
