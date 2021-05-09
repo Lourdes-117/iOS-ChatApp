@@ -153,7 +153,8 @@ extension DatabaseManager {
     }
     
     /// Send A Message To Target Conversation
-    public func sendMessage(conversationID: String, senderEmail: String, senderName: String, message: Message, receiverEmailId: String, completion: @escaping (Bool) -> Void) {
+    public func sendMessage(conversationID: String, senderEmail: String, senderName: String, message: Message, receiverEmailId: String,
+                            reveiverName: String, existingConversationID: String?, completion: @escaping (Bool) -> Void) {
         //Add New Message To Conversation
         database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").observeSingleEvent(of: .value) { [weak self] snapshot in
             guard var currentMessages = snapshot.value as? [[String: Any]] else {
@@ -172,15 +173,56 @@ extension DatabaseManager {
             ]
             
             currentMessages.append(collectionMessage)
-            self?.database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").setValue(currentMessages, withCompletionBlock: { error, _ in
+            self?.database.child("\(conversationID)/\(StringConstants.shared.database.messagesArray)").setValue(currentMessages, withCompletionBlock: { [weak self] error, _ in
                 guard error == nil else {
                     completion(false)
                     return
                 }
-                //Update Sender Latest Message
-                self?.updateLatestMessageForUser(emailOfUser: senderEmail, conversationID: conversationID, message: message, completion: completion)
+                // Update Sender Latest Message
+                self?.updateLatestMessageForUser(emailOfUser: senderEmail, conversationID: conversationID, message: message, completion: { success in
+                    // Latest Message Updated
+                    if success {
+                        completion(true)
+                        return
+                    }
+                    
+                    //Creating Latest Message
+
+                    let currentUserConversationsReference = self?.database.child("\(senderEmail)/\(StringConstants.shared.database.conversations)")
+                    currentUserConversationsReference?.observeSingleEvent(of: .value, with: { currentUserConversationsSnapshot in
+                        if var currentUserConversations = currentUserConversationsSnapshot.value as? [[String: Any]] {
+                            // Conversations Node Exists Under User
+                            guard let newConversation = self?.createConversationNode(message, receiverEmailId, reveiverName, overrideMessageID: existingConversationID) else {
+                                completion(false)
+                                return
+                            }
+                            currentUserConversations.append(newConversation)
+                            currentUserConversationsReference?.setValue(currentUserConversations, withCompletionBlock: { error, _ in
+                                guard error == nil else {
+                                    completion(false)
+                                    return
+                                }
+                                completion(true)
+                            })
+                        } else { // Conversations Node Does Not Exist Under User
+                            guard let newConversation = self?.createConversationNode(message, receiverEmailId, reveiverName, overrideMessageID: existingConversationID) else {
+                                completion(false)
+                                return
+                            }
+                            let newConversationArray = [newConversation]
+                            currentUserConversationsReference?.setValue(newConversationArray, withCompletionBlock: { error, _ in
+                            guard error == nil else {
+                                    completion(false)
+                                    return
+                                }
+                                completion(true)
+                            })
+                        }
+                    })
+                    
+                })
                 
-                //Update Recepient Latest Message
+                // Update Recepient Latest Message
                 self?.updateLatestMessageForUser(emailOfUser: receiverEmailId, conversationID: conversationID, message: message, completion: completion)
             })
         }
@@ -188,13 +230,13 @@ extension DatabaseManager {
     
     
     // Creaet A messae Node
-    private func createConversationNode(_ message: Message, _ otherUserEmail: String, _ otherUserName: String) -> [String: Any] {
+    private func createConversationNode(_ message: Message, _ otherUserEmail: String, _ otherUserName: String, overrideMessageID: String? = nil) -> [String: Any] {
         let messageDate = message.sentDate.getDateString()
         
         let messageString = getMessageString(message)
         
         let newConversationData: [String: Any] = [
-            StringConstants.shared.database.messageId : message.messageId,
+            StringConstants.shared.database.messageId : overrideMessageID ?? message.messageId,
             StringConstants.shared.database.otherUserEmail : otherUserEmail,
             StringConstants.shared.database.otherUserName: otherUserName,
             StringConstants.shared.database.latestMessage : [
@@ -240,6 +282,35 @@ extension DatabaseManager {
         return messageString
     }
     
+    public func conversationExistsAtUserNode(with targetUser: String, completion: @escaping (Result<String, Error>) -> Void ) {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String else {
+            signOutUserAndForceCloseApp()
+            return
+        }
+        // Create Reference For Target User
+        let currentUserReference = database.child("\(targetUser)/\(StringConstants.shared.database.conversations)")
+        currentUserReference.observeSingleEvent(of: .value) { snapshot in
+            guard let targetUserConversations = snapshot.value as? [[String: Any]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            // Search In Target User Conversations
+            if let conversation = targetUserConversations.first(where: {
+                guard let targetUserEmailOfOtherUser = $0[StringConstants.shared.database.otherUserEmail] as? String else { return false }
+                return targetUserEmailOfOtherUser == currentUserEmail
+            }) {
+                // Conversation Id Found In Other User
+                guard let conversationID = conversation[StringConstants.shared.database.messageId] as? String else {
+                    completion(.failure(DatabaseError.failedToFetch))
+                    return
+                }
+                completion(.success(conversationID))
+                return
+            }
+        }
+        
+    }
+    
     fileprivate func createNewConversationForUser(_ currentUserEmail: String, _ messageToSend: Message, _ otherUserEmail: String, _ otherUserName: String, _ completion: @escaping (Bool) -> Void) {
         let reference = database.child(currentUserEmail)
         reference.observeSingleEvent(of: .value) { [weak self] snapshot in
@@ -249,8 +320,8 @@ extension DatabaseManager {
                 return
             }
             if var conversations = userNode[StringConstants.shared.database.conversations] as? [[String: Any]] {
-                //Conversation Array Exists
-                //Appending Messages
+                // Conversation Array Exists
+                // Appending Messages
                 guard let messageNode = self?.createConversationNode(messageToSend, otherUserEmail, otherUserName) else {
                     completion(false)
                     return
@@ -267,8 +338,8 @@ extension DatabaseManager {
                 }
                 
             } else {
-                //Conversation Array Does Not Exist
-                //Creare Array
+                // Conversation Array Does Not Exist
+                // Creare Array
                 userNode[StringConstants.shared.database.conversations] = [
                     self?.createConversationNode(messageToSend, otherUserEmail, otherUserName)
                 ]
@@ -308,6 +379,71 @@ extension DatabaseManager {
                 return
             }
             completion(true)
+        }
+    }
+}
+
+
+// MARK:- Deleting Conversations
+extension DatabaseManager {
+    func deleteConversation(conversationIdToDelete: String, otherUserEmail: String, completion: @escaping (Bool) -> Void ) {
+        guard let email = UserDefaults.standard.value(forKey: StringConstants.shared.userDefaults.email) as? String else {
+            signOutUserAndForceCloseApp()
+            completion(false)
+            return
+        }
+        
+        // Search And Delete
+        let reference = database.child("\(email)/\(StringConstants.shared.database.conversations)")
+        reference.observeSingleEvent(of: .value) { snapshot in
+            if var conversationsOfUser = snapshot.value as? [[String: Any]] {
+                var positionToRemove = 0
+                var isFound = false
+                for conversation in conversationsOfUser {
+                    if let id = conversation[StringConstants.shared.database.messageId] as? String, id == conversationIdToDelete {
+                        debugPrint("Found Conversation To Delete")
+                        isFound = true
+                        break
+                    }
+                    positionToRemove += 1
+                }
+                if !isFound {
+                    completion(false)
+                    return
+                }
+                
+                //Delete In Database
+                conversationsOfUser.remove(at: positionToRemove)
+                reference.setValue(conversationsOfUser) { [weak self] error, _ in
+                    guard error == nil else {
+                        debugPrint("Failed To Write To Database")
+                        completion(false)
+                        return
+                    }
+                    debugPrint("Deleted Conversation")
+                    completion(true)
+                    self?.database.child("\(otherUserEmail)/\(StringConstants.shared.database.conversations)").observeSingleEvent(of: .value, with: { snapshot in
+                        guard let conversationsOfOtherUser = snapshot.value as? [[String: Any]] else { return }
+                        // Delete Whole Conversation If Other User Has Deleted Conversation
+                        if conversationsOfOtherUser.firstIndex(where: { conversation in
+                            conversation[StringConstants.shared.database.messageId] as? String == conversationIdToDelete
+                        }) == nil {
+                            //Delete files from here
+                            self?.database.child("\(conversationIdToDelete)/\(StringConstants.shared.database.messagesArray)").observeSingleEvent(of: .value, with: { snapshot in
+                                guard let messages = snapshot.value as? [[String: Any]] else { return }
+                                messages.filter { message in
+                                    if let messageType = message[StringConstants.shared.database.messageType] as? String {
+                                       return (messageType == StringConstants.shared.messageKind.photo || messageType == StringConstants.shared.messageKind.video)
+                                    }
+                                    return false
+                                }
+                                // TODO :- Files can be deleted here
+                            })
+                            self?.database.child(conversationIdToDelete).removeValue()
+                        }
+                    })
+                }
+            }
         }
     }
 }

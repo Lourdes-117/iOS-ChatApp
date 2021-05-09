@@ -78,13 +78,28 @@ class HomeViewController: UIViewController {
     
     fileprivate func openChatWithUser(name: String, email: String, conversationID: String?) {
         guard let chatViewController = ChatViewController.initiateVC() else { return }
+        if conversationID != nil {
+            chatViewController.setupConversation(name: name, email: email, conversationID: conversationID)
+            chatViewController.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(chatViewController, animated: true)
+            return
+        }
         
-        chatViewController.setupConversation(name: name, email: email, conversationID: conversationID)
-        chatViewController.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(chatViewController, animated: true)
+        // Check If Conversation ID Exists With Other User
+        DatabaseManager.shared.conversationExistsAtUserNode(with: email) { [weak self] result in
+            switch result {
+            case .success(let retreivedConversationID):
+                chatViewController.setupConversation(name: name, email: email, conversationID: retreivedConversationID)
+            case .failure(_):
+                chatViewController.setupConversation(name: name, email: email, conversationID: nil)
+            }
+            chatViewController.navigationItem.largeTitleDisplayMode = .never
+            self?.navigationController?.pushViewController(chatViewController, animated: true)
+        }
     }
 }
 
+// MARK:- TableView Datasource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return conversations.count
@@ -102,6 +117,7 @@ extension HomeViewController: UITableViewDataSource {
     
 }
 
+// MARK:- TableView Delegate
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
@@ -119,8 +135,32 @@ extension HomeViewController: UITableViewDelegate {
         let conversationID = conversations[indexPath.row].id
         openChatWithUser(name: name, email: email, conversationID: conversationID)
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            let isLastConversation = conversations.count == 1
+            DatabaseManager.shared.deleteConversation(conversationIdToDelete: conversations[indexPath.row].id, otherUserEmail: conversations[indexPath.row].otherUserEmail) { [weak self] success in
+                if success {
+                    if isLastConversation {
+                        self?.conversations.remove(at: indexPath.row)
+                        tableView.beginUpdates()
+                        self?.tableView.deleteRows(at: [indexPath], with: .left)
+                        tableView.endUpdates()
+                    }
+                }
+            }
+        default:
+            break
+        }
+    }
 }
 
+// MARK:- New Conversation Delegate
 extension HomeViewController: NewConversationDelegate {
     func startNewConversationWith(name: String, email: String) {
         let conversationWithSelectedUser = (conversations.filter({ $0.otherUserEmail == email }).first)?.id

@@ -257,7 +257,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 return
             }
             self.messageInputBar.inputTextView.text = ""
-            DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: viewModel.senderEmail ?? "", senderName: viewModel.senderName, message: message, receiverEmailId: viewModel.receiverEmail) { success in
+            DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: viewModel.senderEmail ?? "", senderName: viewModel.senderName, message: message, receiverEmailId: viewModel.receiverEmail, reveiverName: viewModel.receiverName, existingConversationID: viewModel.conversationID) { success in
                 if success {
                     debugPrint("Message Sent")
                 } else {
@@ -297,7 +297,7 @@ extension ChatViewController: UIImagePickerControllerDelegate {
                     let media = Media(url: url, image: image, placeholderImage: lowResImage, size: .zero)
                     let message = Message(sender: selfSender, messageId: messageID, sentDate: Date(), kind: .photo(media))
                     //Sending Message
-                    DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: senderEmail, senderName: strongSelf.viewModel.senderName, message: message, receiverEmailId: strongSelf.viewModel.receiverEmail) { success in
+                    DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: senderEmail, senderName: strongSelf.viewModel.senderName, message: message, receiverEmailId: strongSelf.viewModel.receiverEmail, reveiverName: strongSelf.viewModel.receiverName, existingConversationID: strongSelf.viewModel.conversationID) { success in
                         if success {
                             debugPrint("Image Message Sent")
                         } else {
@@ -323,7 +323,7 @@ extension ChatViewController: UIImagePickerControllerDelegate {
                     let media = Media(url: url, image: nil, placeholderImage: UIImage(), size: .zero)
                     let message = Message(sender: selfSender, messageId: messageID, sentDate: Date(), kind: .video(media))
                     //Sending Message
-                    DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: senderEmail, senderName: strongSelf.viewModel.senderName, message: message, receiverEmailId: strongSelf.viewModel.receiverEmail) { success in
+                    DatabaseManager.shared.sendMessage(conversationID: conversationID, senderEmail: senderEmail, senderName: strongSelf.viewModel.senderName, message: message, receiverEmailId: strongSelf.viewModel.receiverEmail, reveiverName: strongSelf.viewModel.receiverName, existingConversationID: strongSelf.viewModel.conversationID) { success in
                         if success {
                             debugPrint("Video Message Sent")
                         } else {
